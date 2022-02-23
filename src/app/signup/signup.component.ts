@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../Interfaces/User';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import {app} from '../firebase';
 
 @Component({
   selector: 'app-signup',
@@ -26,7 +28,15 @@ export class SignupComponent implements OnInit {
   }
 
   handleSubmit(){
-    console.log(this.user.firstname, this.user.lastname, this.user.phoneNumber, this.user.DOB);
+    app();
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, this.user.email, this.user.password)
+      .then((userCredential) => {
+        console.log('signed up', userCredential);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
 }
