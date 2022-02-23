@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit {
   }
 
   handleSubmit(){
-    console.log(this.user.email, this.user.password) //yugutsesyre
+    console.log(this.user.email, this.user.password)
+    const hiru = "Hiru"
     const auth = getAuth();
     signInWithEmailAndPassword(auth, this.user.email, this.user.password)
     .then((userCredential) => {
