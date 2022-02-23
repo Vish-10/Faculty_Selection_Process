@@ -33,6 +33,7 @@ export class SignupComponent implements OnInit {
     createUserWithEmailAndPassword(auth, this.user.email, this.user.password)
       .then((userCredential) => {
         console.log('signed up', userCredential);
+      //add the user info to firestore
       })
       .catch((err) => {
         console.log(err);
