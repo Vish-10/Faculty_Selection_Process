@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {User} from '../Interfaces/User';
+import {login} from '../firebase';
 
 @Component({
   selector: 'app-login',
@@ -29,14 +30,7 @@ export class LoginComponent implements OnInit {
 
   handleSubmit(){
     console.log(this.user.email, this.user.password)
-    const auth = getAuth();
-    signInWithEmailAndPassword(auth, this.user.email, this.user.password)
-    .then((userCredential) => {
-      console.log('logged in', userCredential);
-    })
-    .catch((err) => {
-      console.log(err);
-    })
+    login(this.user.email, this.user.password);
   }
 
 }
