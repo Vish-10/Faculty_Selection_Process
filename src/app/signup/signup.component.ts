@@ -27,7 +27,7 @@ export class SignupComponent implements OnInit {
   }
 
   handleSubmit(){
-    signUp(this.user.email, this.user.password);
+    signUp(this.user);
   }
 
 }
