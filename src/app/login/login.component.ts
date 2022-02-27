@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {User} from '../Interfaces/User';
 import {login} from '../firebase';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,15 +23,17 @@ export class LoginComponent implements OnInit {
     DOB:new Date()
   }
 
-  constructor() { 
-  }
+  constructor(public router:Router) { }
 
   ngOnInit(): void {
   }
 
-  handleSubmit(){
+  async handleSubmit(){
     console.log(this.user.email, this.user.password)
-    login(this.user.email, this.user.password);
+    var flag =await login(this.user.email, this.user.password);
+    if (flag){
+      this.router.navigate(['./home-page'])
+    }
   }
 
 }
