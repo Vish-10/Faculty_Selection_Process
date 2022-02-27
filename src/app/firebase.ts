@@ -28,26 +28,32 @@ const auth = getAuth();
 const db = getFirestore();
 
 //signUp
-export function signUp(user: User){
-  createUserWithEmailAndPassword(auth, user.email, user.password)
+export async function signUp(user: User){
+  var flag = await createUserWithEmailAndPassword(auth, user.email, user.password)
       .then((userCredential) => {
         console.log('signed up', userCredential);
         addUserData(user);
+        return true;
       })
       .catch((err) => {
         console.log(err);
+        return false;
       })
+  return flag;
 }
 
 //login
-export function login(email: string, password: string){
-  signInWithEmailAndPassword(auth, email, password)
+export async function login(email: string, password: string){
+  var flag = await signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       console.log('logged in', userCredential);
+      return true;
     })
     .catch((err) => {
       console.log(err);
+      return false;
     })
+  return flag;
 }
 
 async function addUserData(user: User){
