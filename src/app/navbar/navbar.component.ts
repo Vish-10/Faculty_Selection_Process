@@ -1,16 +1,14 @@
-import { Component , OnInit } from '@angular/core';
-import { getSessionStorage } from './firebase';
-
-import {User} from './Interfaces/User';
+import { Component, OnInit } from '@angular/core';
+import { getSessionStorage } from '../firebase';
+import {User} from '../Interfaces/User';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.css']
 })
-export class AppComponent implements OnInit {
+export class NavbarComponent implements OnInit {
   user: User;
-
   constructor () { 
     this.user  = {
       firstname: '',
@@ -35,4 +33,5 @@ export class AppComponent implements OnInit {
    this.user = await getSessionStorage('user');
   console.log(this.user.isAdmin)
  }
+
 }

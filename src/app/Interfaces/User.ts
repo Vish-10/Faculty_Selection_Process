@@ -8,4 +8,5 @@ export interface User {
     state: string;
     city: string;
     DOB: Date;
+    isAdmin: Boolean;
 }

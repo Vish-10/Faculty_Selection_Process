@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit {
     password: '',
     state: '',
     city: '',
-    DOB:new Date()
+    DOB:new Date(),
+    isAdmin: false
   }
 
   constructor(public router:Router) { }
@@ -29,10 +30,9 @@ export class LoginComponent implements OnInit {
   }
 
   async handleSubmit(){
-    console.log(this.user.email, this.user.password)
-    var flag =await login(this.user.email, this.user.password);
+    var flag = await login(this.user.email, this.user.password);
     if (flag){
-      this.router.navigate(['./home-page'])
+      this.router.navigateByUrl('/home-page', {state: {email: this.user.email}})
     }
   }
 

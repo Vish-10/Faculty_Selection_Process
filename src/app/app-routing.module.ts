@@ -7,11 +7,13 @@ import { HomePageComponent } from './home-page/home-page.component';
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent}, 
-  {path: 'home-page', component: HomePageComponent}
+  {path: 'home-page', component: HomePageComponent},
+  { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+}

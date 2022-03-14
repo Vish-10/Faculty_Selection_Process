@@ -2,9 +2,11 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore"; 
+import { collection, addDoc, query, where, getDocs } from "firebase/firestore"; 
 import { getFirestore } from "firebase/firestore"
 import {User} from './Interfaces/User';
+import {Job} from './Interfaces/Job';
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -45,8 +47,7 @@ export async function signUp(user: User){
 //login
 export async function login(email: string, password: string){
   var flag = await signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      console.log('logged in', userCredential);
+    .then(async (userCredential) => {
       return true;
     })
     .catch((err) => {
@@ -56,7 +57,36 @@ export async function login(email: string, password: string){
   return flag;
 }
 
-async function addUserData(user: User){
+async function addUserData(user: User){//dont save pass
   const newUser = await addDoc(collection(db, 'users'), user)
   console.log(newUser);
+}
+
+export async function getUser(email: string){
+  console.log(email)
+  const users = query(collection(db, 'users'), where('email', '==', email))
+  const querySnap = await getDocs(users);
+  var tempUser;
+  querySnap.forEach((docs) => {
+    tempUser = docs.data();
+  })
+  return tempUser;
+}
+
+export function addSessionStorage(key: string, value: string){
+  sessionStorage.setItem(key, JSON.stringify(value))
+}
+
+export function getSessionStorage(key: string){
+  return JSON.parse(sessionStorage.getItem(key) || 'odi poda naaye');
+}
+
+export async function getAllJobs(){
+  const jobs = await getDocs(collection(db, "jobs"));
+  var jobLists: Job[] = [];
+  jobs.forEach((temp) => {
+    var job = temp.data()
+    jobLists.push({id: temp.id, name: job['name'], provider: job['provider'], deadline: job['deadline'], eligibilty: job['eligibilty'], JD: job['JD']});
+  });
+  return jobLists;
 }

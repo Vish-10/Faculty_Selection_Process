@@ -20,7 +20,8 @@ export class SignupComponent implements OnInit {
     password: '',
     state: '',
     city: '',
-    DOB:new Date()
+    DOB:new Date(),
+    isAdmin: false
   }
 
   constructor(public router:Router) { }
