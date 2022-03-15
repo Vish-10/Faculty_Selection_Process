@@ -6,7 +6,6 @@ import { collection, addDoc, query, where, getDocs } from "firebase/firestore";
 import { getFirestore } from "firebase/firestore"
 import {User} from './Interfaces/User';
 import {Job} from './Interfaces/Job';
-
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -78,7 +77,7 @@ export function addSessionStorage(key: string, value: string){
 }
 
 export function getSessionStorage(key: string){
-  return JSON.parse(sessionStorage.getItem(key) || 'odi poda naaye');
+  return JSON.parse(sessionStorage.getItem(key) || '{"key" : "odi poda naaye"}');
 }
 
 export async function getAllJobs(){

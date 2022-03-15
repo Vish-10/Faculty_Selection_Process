@@ -8,6 +8,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { JobDescriptionComponent } from './job-description/job-description.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     LoginComponent,
     SignupComponent,
     HomePageComponent,
-    NavbarComponent
+    NavbarComponent,
+    JobDescriptionComponent
   ],
   imports: [
     BrowserModule,

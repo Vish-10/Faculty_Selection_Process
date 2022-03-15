@@ -10,7 +10,11 @@ import {Job} from '../Interfaces/Job';
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
+
+  data : Iterable<any>;
+  
   constructor (private router:Router) { 
+    this.data = [];
     this.init();
   }
 
@@ -19,10 +23,16 @@ export class HomePageComponent implements OnInit {
 
   async init(){
     var email = this.router.getCurrentNavigation()?.extras.state?.['email'];
+    console.log(email)
     if(email){
       addSessionStorage('userEmail', email);
     }
+    this.data = await getAllJobs();
     console.log(await getAllJobs());
+  }
+
+  jobdescription(job: any) {
+    this.router.navigateByUrl('/job-description', {state: {jobdetails: job}})
   }
 
 }
