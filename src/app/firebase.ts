@@ -1,11 +1,13 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc, query, where, getDocs } from "firebase/firestore"; 
 import { getFirestore } from "firebase/firestore"
 import {User} from './Interfaces/User';
 import {Job} from './Interfaces/Job';
+import { getStorage, ref, uploadBytes } from "firebase/storage";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -27,6 +29,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const auth = getAuth();
 const db = getFirestore();
+const storage = getStorage();
 
 //signUp
 export async function signUp(user: User){
@@ -77,7 +80,7 @@ export function addSessionStorage(key: string, value: string){
 }
 
 export function getSessionStorage(key: string){
-  return JSON.parse(sessionStorage.getItem(key) || '{"key" : "odi poda naaye"}');
+  return JSON.parse(sessionStorage.getItem(key) || '{"false" : "false"}');
 }
 
 export async function getAllJobs(){
@@ -88,4 +91,21 @@ export async function getAllJobs(){
     jobLists.push({id: temp.id, name: job['name'], provider: job['provider'], deadline: job['deadline'], eligibilty: job['eligibilty'], JD: job['JD']});
   });
   return jobLists;
+}
+
+export async function logOutFirebase() {
+  var flag = await signOut(auth).then(() => {
+    return true;
+  }).catch((error) => {
+    return false;
+  });
+  return flag;
+}
+
+export function uploadFileHelper(file, jobName, userEmail){
+  const fileName = jobName + '/' + userEmail;
+  const storageRef = ref(storage, fileName);
+  uploadBytes(storageRef, file).then((snapshot) => {
+    console.log('Uploaded a blob or file!');//show alert
+  });
 }

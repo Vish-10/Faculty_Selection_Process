@@ -33,6 +33,5 @@ export class AppComponent implements OnInit {
 
  async init(){
     this.user = await getSessionStorage('user');
-    console.log(this.user.isAdmin)
- }
+   }
 }

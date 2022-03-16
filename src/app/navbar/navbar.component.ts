@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { getSessionStorage } from '../firebase';
+import { getSessionStorage, logOutFirebase } from '../firebase';
 import {User} from '../Interfaces/User';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +10,11 @@ import {User} from '../Interfaces/User';
 })
 export class NavbarComponent implements OnInit {
   user: User;
-  constructor () { 
+  email: boolean;
+  keys: string
+  userEmail : string
+
+  constructor (private router : Router) { 
     this.user  = {
       firstname: '',
       lastname: '',
@@ -22,16 +27,28 @@ export class NavbarComponent implements OnInit {
       DOB:new Date(),
       isAdmin: false
     };
+    this.userEmail = getSessionStorage('userEmail') 
+    this.keys = Object.keys(this.userEmail)[0];
+    if(this.keys == 'false'){
+      this.email = false;
+    }
+    else{
+      this.email = true
+    }
   }
   ngOnInit(): void {
-
-    this.init();
   }
 
 
- async init(){
-   this.user = await getSessionStorage('user');
-  console.log(this.user.isAdmin)
+
+ async logOut(){
+    sessionStorage.removeItem('userEmail');
+    var flag = await logOutFirebase();
+    if (flag) {
+      this.router.navigate(['./login']);
+    } else {
+      console.log("Signout error") ;
+    }
  }
 
 }

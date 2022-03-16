@@ -23,12 +23,10 @@ export class HomePageComponent implements OnInit {
 
   async init(){
     var email = this.router.getCurrentNavigation()?.extras.state?.['email'];
-    console.log(email)
     if(email){
       addSessionStorage('userEmail', email);
     }
     this.data = await getAllJobs();
-    console.log(await getAllJobs());
   }
 
   jobdescription(job: any) {
