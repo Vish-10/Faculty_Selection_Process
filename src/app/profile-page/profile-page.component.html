@@ -1,0 +1,82 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<app-navbar></app-navbar>
+<div class="container-xl px-4 mt-4">
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <div class="col-xl-4">
+            <!-- Profile picture card-->
+            <div class="card mb-4 mb-xl-0">
+                <div class="card-header">Profile Picture</div>
+                <div class="card-body text-center">
+                    <!-- Profile picture image-->
+                    <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                    <!-- Profile picture help block-->
+                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                    <!-- Profile picture upload button-->
+                    <button class="btn btn-primary" type="button">Upload new image</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-8">
+            <!-- Account details card-->
+            <div class="card mb-4">
+                <div class="card-header">Account Details</div>
+                <div class="card-body">
+                    <form>
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (first name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="firstName">First name</label>
+                                <input class="form-control" id="firstName" type="text" aria-label="First Name" value="{{user.firstname}}"[(ngModel)] = "user.firstname" [ngModelOptions]="{standalone: true}">
+                            </div>
+                            <!-- Form Group (last name)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="lastName">Last name</label>
+                                <input class="form-control" id="lastName" type="text" value="{{user.lastname}}" [(ngModel)] = "user.lastname">
+                            </div>
+                        </div>
+                        <!-- Form Group (email address)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="email">Email address</label>
+                            <input class="form-control" id="email" type="email" value="{{user.email}}" [(ngModel)] = "user.email">
+                        </div>
+                        
+                        <!-- Form Row-->
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (phone number)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="phoneNumber">Phone number</label>
+                                <input class="form-control" id="phoneNumber" type="tel" value="{{user.phoneNumber}}" [(ngModel)] = "user.phoneNumber">
+                            </div>
+                            <!-- Form Group (birthday)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="DOB">Birthday</label>
+                                <input class="form-control" id="DOB" type="date" name="DOB" value="{{user.DOB}}" [(ngModel)] = "user.DOB">
+                            </div>
+                        </div>
+                        <div class="row gx-3 mb-3">
+                            <!-- Form Group (State)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="state">State</label>
+                                <input class="form-control" id="state" type="text" name="state" value="{{user.state}}" [(ngModel)] = "user.state">
+                            </div>
+                            <!-- Form Group (City)-->
+                            <div class="col-md-6">
+                                <label class="small mb-1" for="city">City</label>
+                                <input class="form-control" id="city" type="text" name="city" value="{{user.city}}" [(ngModel)] = "user.city">
+                            </div>
+                        </div>
+                        <!-- Form Group (Address)-->
+                        <div class="mb-3">
+                            <label class="small mb-1" for="address">Address</label>
+                            <input class="form-control" id="address" type="text" value="{{user.email}}" [(ngModel)] = "user.email">
+                        </div>
+                        <!-- Save changes button-->
+                        <button class="btn btn-primary" type="button" (click)="onSubmit()" routerLink ="/home-page">Save changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

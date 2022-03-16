@@ -64,6 +64,11 @@ async function addUserData(user: User){//dont save pass
   console.log(newUser);
 }
 
+export async function addJobData(job: Job){
+  const newUser = await addDoc(collection(db, 'jobs'), job)
+  console.log(newUser);
+}
+
 export async function getUser(email: string){
   console.log(email)
   const users = query(collection(db, 'users'), where('email', '==', email))

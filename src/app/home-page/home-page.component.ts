@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {addSessionStorage, getAllJobs} from '../firebase';
+import {addSessionStorage, getAllJobs, getUser} from '../firebase';
 import {User} from '../Interfaces/User';
 import {Job} from '../Interfaces/Job';
 
@@ -12,6 +12,18 @@ import {Job} from '../Interfaces/Job';
 export class HomePageComponent implements OnInit {
 
   data : Iterable<any>;
+  user: User = {
+    firstname: '',
+    lastname: '',
+    phoneNumber: 91,
+    email: '',
+    address: '',
+    password: '',
+    state: '',
+    city: '',
+    DOB:new Date(),
+    isAdmin: "false"
+  }
   
   constructor (private router:Router) { 
     this.data = [];
@@ -23,6 +35,7 @@ export class HomePageComponent implements OnInit {
 
   async init(){
     var email = this.router.getCurrentNavigation()?.extras.state?.['email'];
+    this.user = await getUser(email)
     if(email){
       addSessionStorage('userEmail', email);
     }

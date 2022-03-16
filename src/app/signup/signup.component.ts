@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit {
     state: '',
     city: '',
     DOB:new Date(),
-    isAdmin: false
+    isAdmin: "false"
   }
 
   constructor(public router:Router) { }

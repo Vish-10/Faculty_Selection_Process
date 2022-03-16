@@ -9,6 +9,8 @@ import { SignupComponent } from './signup/signup.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { JobDescriptionComponent } from './job-description/job-description.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { AddJobComponent } from './add-job/add-job.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { JobDescriptionComponent } from './job-description/job-description.compo
     SignupComponent,
     HomePageComponent,
     NavbarComponent,
-    JobDescriptionComponent
+    JobDescriptionComponent,
+    ProfilePageComponent,
+    AddJobComponent
   ],
   imports: [
     BrowserModule,
