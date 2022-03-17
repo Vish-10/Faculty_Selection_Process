@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc, query, where, getDocs } from "firebase/firestore"; 
+import { collection, addDoc, query, where, getDocs, updateDoc, doc } from "firebase/firestore"; 
 import { getFirestore } from "firebase/firestore"
 import {User} from './Interfaces/User';
 import {Job} from './Interfaces/Job';
@@ -62,6 +62,24 @@ export async function login(email: string, password: string){
 async function addUserData(user: User){//dont save pass
   const newUser = await addDoc(collection(db, 'users'), user)
   console.log(newUser);
+}
+
+export async function updateUserData(user: User){
+  const q = query(collection(db, "users"), where("email", "==", user.email));
+  const querySnapshot = await getDocs(q);
+
+  querySnapshot.forEach(async (tempUser) => {
+    const userRef = doc(db, "users", tempUser.id);
+    await updateDoc(userRef, {
+      firstname: user.firstname,
+      lastname: user.lastname,
+      phoneNumber: user.phoneNumber,
+      DOB: user.DOB,
+      state: user.state,
+      city: user.city,
+      address: user.address
+    });//show alert
+  });
 }
 
 export async function addJobData(job: Job){

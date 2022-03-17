@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../Interfaces/User';
-import { getUser, getSessionStorage } from '../firebase';
+import { getUser, getSessionStorage, updateUserData } from '../firebase';
 
 @Component({
   selector: 'app-profile-page',
@@ -37,7 +37,7 @@ export class ProfilePageComponent implements OnInit {
   }
 
   async onSubmit(){
-    console.log(this.user)
+    updateUserData(this.user)
   }
 
 }

@@ -11,11 +11,15 @@
         <p class="card-text">{{job.eligibilty}}</p><br/>
         <p class="card-text"><span style = "font-weight: 600;">Deadline: </span>{{job.deadline}}</p><br/>
         <div *ngIf = "email">
-            Resume: <input type = "file" id = "resume" name = "resume" (change) = "onChange($event)" accept=".pdf">
+            Resume: <input type = "file" id = "resume" name = "resume" (change) = "onChange($event)" accept=".pdf"><br /><br />
             <a class="btn btn-primary" (click) = "onUpload()">Apply</a>
         </div>
         <div *ngIf = "!email">
             Login to apply
+        </div>
+        <div *ngIf = "user.isAdmin == 'true'"><br />
+            <a class = "btn btn-danger">Delete</a>&nbsp;&nbsp;
+            <a class = "btn btn-warning">Edit</a>
         </div>
         </div>
     </div>

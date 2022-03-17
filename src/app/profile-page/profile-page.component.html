@@ -28,26 +28,22 @@
                             <!-- Form Group (first name)-->
                             <div class="col-md-6">
                                 <label class="small mb-1" for="firstName">First name</label>
-                                <input class="form-control" id="firstName" type="text" aria-label="First Name" value="{{user.firstname}}"[(ngModel)] = "user.firstname" [ngModelOptions]="{standalone: true}">
+                                <input class="form-control" id="firstName" type="text" name="firstname" value="{{user.firstname}}"[(ngModel)] = "user.firstname">
                             </div>
                             <!-- Form Group (last name)-->
                             <div class="col-md-6">
                                 <label class="small mb-1" for="lastName">Last name</label>
-                                <input class="form-control" id="lastName" type="text" value="{{user.lastname}}" [(ngModel)] = "user.lastname">
+                                <input class="form-control" id="lastName" name = "lastname" type="text" value="{{user.lastname}}" [(ngModel)] = "user.lastname">
                             </div>
                         </div>
-                        <!-- Form Group (email address)-->
-                        <div class="mb-3">
-                            <label class="small mb-1" for="email">Email address</label>
-                            <input class="form-control" id="email" type="email" value="{{user.email}}" [(ngModel)] = "user.email">
-                        </div>
+
                         
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (phone number)-->
                             <div class="col-md-6">
                                 <label class="small mb-1" for="phoneNumber">Phone number</label>
-                                <input class="form-control" id="phoneNumber" type="tel" value="{{user.phoneNumber}}" [(ngModel)] = "user.phoneNumber">
+                                <input class="form-control" id="phoneNumber" name = "phonenumber" type="tel" value="{{user.phoneNumber}}" [(ngModel)] = "user.phoneNumber">
                             </div>
                             <!-- Form Group (birthday)-->
                             <div class="col-md-6">
@@ -70,10 +66,10 @@
                         <!-- Form Group (Address)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="address">Address</label>
-                            <input class="form-control" id="address" type="text" value="{{user.email}}" [(ngModel)] = "user.email">
+                            <input class="form-control" id="address" name = "address" type="text" value="{{user.email}}" [(ngModel)] = "user.address">
                         </div>
                         <!-- Save changes button-->
-                        <button class="btn btn-primary" type="button" (click)="onSubmit()" routerLink ="/home-page">Save changes</button>
+                        <button class="btn btn-primary" type="button" (click)="onSubmit()">Save changes</button>
                     </form>
                 </div>
             </div>

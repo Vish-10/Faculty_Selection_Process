@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getSessionStorage, logOutFirebase } from '../firebase';
+import { getSessionStorage, logOutFirebase, getUser } from '../firebase';
 import {User} from '../Interfaces/User';
 import { Router } from '@angular/router';
 
@@ -34,12 +34,15 @@ export class NavbarComponent implements OnInit {
     }
     else{
       this.email = true
+      this.handleUserData()
     }
   }
   ngOnInit(): void {
   }
 
-
+async handleUserData(){
+  this.user = await getUser(this.userEmail)
+}
 
  async logOut(){
     sessionStorage.removeItem('userEmail');
