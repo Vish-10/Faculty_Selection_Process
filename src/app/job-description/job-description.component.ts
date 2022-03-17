@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {Job} from '../Interfaces/Job';
 import {User} from '../Interfaces/User';
-import { getSessionStorage, uploadFileHelper, getUser } from '../firebase';
+import { getSessionStorage, uploadFileHelper, getUser, deleteJob } from '../firebase';
 
 @Component({
   selector: 'app-job-description',
@@ -10,14 +10,25 @@ import { getSessionStorage, uploadFileHelper, getUser } from '../firebase';
   styleUrls: ['./job-description.component.css']
 })
 export class JobDescriptionComponent implements OnInit {
-  user:User
+  user:User = {
+    firstname: '',
+    lastname: '',
+    phoneNumber: 91,
+    email: '',
+    address: '',
+    password: '',
+    state: '',
+    city: '',
+    DOB:new Date(),
+    isAdmin: "false"
+  }
   job: Job
   email: boolean
   userEmail : string
   keys: string
   file: File
   constructor(private router:Router){ 
-    this.job = this.router.getCurrentNavigation()?.extras.state?.['jobdetails'];
+    this.job = this.router.getCurrentNavigation()?.extras.state?.['jobDetails'];
     this.userEmail = getSessionStorage('userEmail') 
     this.keys = Object.keys(this.userEmail)[0];
     this.file = null;
@@ -40,6 +51,14 @@ export class JobDescriptionComponent implements OnInit {
 
   onChange(event){
     this.file = event.target.files[0];
+  }
+
+  handleEdit(){
+    this.router.navigateByUrl('/addJob', {state: {jobdetails: this.job}})
+  }
+
+  handleDelete(){
+    deleteJob(this.job)
   }
 
   onUpload(){

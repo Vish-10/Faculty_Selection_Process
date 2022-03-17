@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Job } from '../Interfaces/Job';
-import { addJobData, getSessionStorage, getUser } from '../firebase';
+import { addJobData, getSessionStorage, getUser, updateUserData } from '../firebase';
 import { User } from '../Interfaces/User';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-job',
@@ -32,10 +33,17 @@ user: User = {
   isAdmin: "false"
 }
   email: string
+  flag: boolean = false
 
-  constructor() { 
+  constructor(private router: Router) { 
     this.email = getSessionStorage("userEmail")
+    var temp = this.router.getCurrentNavigation()?.extras.state?.['jobdetails'];
+    console.log(temp)
     this.init();
+    if (temp) {
+      this.job = temp
+      this.flag = true
+    }
   }
 
   ngOnInit(): void {
@@ -43,10 +51,19 @@ user: User = {
 
   async init(){
     this.user = await getUser(this.email)
+    this.job.provider = this.user.isAdmin
+    var temp = false
+    console.log(temp)
+    
   }
 
   handleAddJob(){
+    console.log
     addJobData(this.job);
+  }
+
+  handleUpdate(){
+    
   }
 
 }

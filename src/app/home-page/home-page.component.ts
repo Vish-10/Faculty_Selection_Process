@@ -40,7 +40,7 @@ export class HomePageComponent implements OnInit {
   }
 
   jobdescription(job: any) {
-    this.router.navigateByUrl('/job-description', {state: {jobdetails: job}})
+    this.router.navigateByUrl('/job-description', {state: {jobDetails: job}})
   }
 
 }

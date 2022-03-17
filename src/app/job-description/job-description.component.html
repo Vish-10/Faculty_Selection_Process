@@ -10,16 +10,18 @@
         <h6>Eligibilty:</h6>
         <p class="card-text">{{job.eligibilty}}</p><br/>
         <p class="card-text"><span style = "font-weight: 600;">Deadline: </span>{{job.deadline}}</p><br/>
-        <div *ngIf = "email">
-            Resume: <input type = "file" id = "resume" name = "resume" (change) = "onChange($event)" accept=".pdf"><br /><br />
-            <a class="btn btn-primary" (click) = "onUpload()">Apply</a>
+        <div *ngIf= "user.isAdmin == 'false'">
+            <div *ngIf = "email">
+                Resume: <input type = "file" id = "resume" name = "resume" (change) = "onChange($event)" accept=".pdf"><br/><br/>
+                <a class="btn btn-primary" (click) = "onUpload()">Apply</a>
+            </div>
+            <div *ngIf = "!email">
+                Login to apply
+            </div>
         </div>
-        <div *ngIf = "!email">
-            Login to apply
-        </div>
-        <div *ngIf = "user.isAdmin == 'true'"><br />
-            <a class = "btn btn-danger">Delete</a>&nbsp;&nbsp;
-            <a class = "btn btn-warning">Edit</a>
+        <div *ngIf= "user.isAdmin == 'true'"><br />
+            <a class = "btn btn-danger" (click)="handleDelete()" routerLink="/home-page">Delete</a>&nbsp;&nbsp;
+            <a class = "btn btn-warning" (click)="handleEdit()" routerLink="/home-page">Edit</a>
         </div>
         </div>
     </div>

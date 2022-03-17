@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc, query, where, getDocs, updateDoc, doc } from "firebase/firestore"; 
-import { getFirestore } from "firebase/firestore"
+import { getFirestore, deleteDoc } from "firebase/firestore"
 import {User} from './Interfaces/User';
 import {Job} from './Interfaces/Job';
 import { getStorage, ref, uploadBytes } from "firebase/storage";
@@ -82,13 +82,16 @@ export async function updateUserData(user: User){
   });
 }
 
+export async function deleteJob(job:Job) {
+  await deleteDoc(doc(db, "jobs", job.id));
+}
+
 export async function addJobData(job: Job){
   const newUser = await addDoc(collection(db, 'jobs'), job)
   console.log(newUser);
 }
 
 export async function getUser(email: string){
-  console.log(email)
   const users = query(collection(db, 'users'), where('email', '==', email))
   const querySnap = await getDocs(users);
   var tempUser;
