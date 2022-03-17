@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {Job} from '../Interfaces/Job' 
-import { getSessionStorage, uploadFileHelper } from '../firebase';
+import {Job} from '../Interfaces/Job';
+import {User} from '../Interfaces/User';
+import { getSessionStorage, uploadFileHelper, getUser } from '../firebase';
 
 @Component({
   selector: 'app-job-description',
@@ -9,7 +10,7 @@ import { getSessionStorage, uploadFileHelper } from '../firebase';
   styleUrls: ['./job-description.component.css']
 })
 export class JobDescriptionComponent implements OnInit {
-
+  user:User
   job: Job
   email: boolean
   userEmail : string
@@ -26,10 +27,16 @@ export class JobDescriptionComponent implements OnInit {
     }
     else{
       this.email = true
+      this.handleUserData();
     }
   }
 
   ngOnInit(): void {}
+
+  async handleUserData(){
+    this.user = await getUser(this.userEmail);
+    this.user.isAdmin = this.user.isAdmin == this.job.provider? 'true' : 'false';
+  }
 
   onChange(event){
     this.file = event.target.files[0];
