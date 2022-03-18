@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc, query, where, getDocs, updateDoc, doc } from "firebase/firestore"; 
+import { collection, addDoc, query, setDoc, where, getDocs, updateDoc, doc } from "firebase/firestore"; 
 import { getFirestore, deleteDoc } from "firebase/firestore"
 import {User} from './Interfaces/User';
 import {Job} from './Interfaces/Job';
@@ -119,6 +119,11 @@ export async function getAllJobs(){
   return jobLists;
 }
 
+export async function updateJob(job: Job){
+  console.log('called')
+  await setDoc(doc(db, "jobs", job.id), job);
+}
+
 export async function logOutFirebase() {
   var flag = await signOut(auth).then(() => {
     return true;
@@ -128,10 +133,22 @@ export async function logOutFirebase() {
   return flag;
 }
 
-export function uploadFileHelper(file, jobName, userEmail){
-  const fileName = jobName + '/' + userEmail;
+export function uploadFileHelper(file, jobProvider, jobName, userEmail){
+  const fileName = jobProvider + '/' + jobName + '/' + userEmail;
   const storageRef = ref(storage, fileName);
-  uploadBytes(storageRef, file).then((snapshot) => {
-    console.log('Uploaded a blob or file!');//show alert
+  uploadBytes(storageRef, file).then(async (snapshot) => {
+    const newApplication = await addDoc(collection(db, 'appliedJobs'), {user: userEmail, provider: jobProvider, name: jobName, status: 'pending'})
   });
+}
+
+export async function getAppliedJob(email, provider, jobName){
+  var q = query(collection(db, "appliedJobs"), where("email", "==", email));
+  q = query(collection(db, "appliedJobs"), where("provider", "==", provider));
+  q = query(collection(db, "appliedJobs"), where("name", "==", jobName));
+  var tempApplication;
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach(doc => {
+    tempApplication = doc.data();
+  })
+  return tempApplication? true : false;
 }

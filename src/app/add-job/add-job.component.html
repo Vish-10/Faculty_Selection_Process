@@ -20,8 +20,6 @@
                         <input class="form-control" name="jobProvider" type="text" [(ngModel)] = "job.provider">
                     </div>
                 </div>
-                
-                
                 <!-- Form Row-->
                 <div class="row gx-3 mb-3">
                     <!-- Form Group (Eligibility Criteria)-->
@@ -41,8 +39,7 @@
                     <textarea class="form-control" name="jobDescription" rows="5" [(ngModel)] = "job.JD"></textarea>
                 </div>
                 <!-- Save changes button-->
-                <button class="btn btn-primary" type="button" (click)="handleAddJob()" *ngIf="!flag">Add Job</button>
-                <button class="btn btn-primary" type="button" (click)="handleUpdate()" *ngIf="flag">Update</button>
+                <button class="btn btn-primary" type="button" (click)="handleAddJob()">Submit</button>
             </form>
         </div>
     </div>

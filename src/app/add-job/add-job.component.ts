@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Job } from '../Interfaces/Job';
-import { addJobData, getSessionStorage, getUser, updateUserData } from '../firebase';
+import { addJobData, getSessionStorage, getUser, updateJob } from '../firebase';
 import { User } from '../Interfaces/User';
 import { Router } from '@angular/router';
 
@@ -51,15 +51,15 @@ user: User = {
 
   async init(){
     this.user = await getUser(this.email)
-    this.job.provider = this.user.isAdmin
-    var temp = false
-    console.log(temp)
+    this.job.provider = this.user.isAdmin;
     
   }
 
   handleAddJob(){
-    console.log
-    addJobData(this.job);
+    if(!this.flag)
+      addJobData(this.job);
+    else  
+      updateJob(this.job)
   }
 
   handleUpdate(){

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {Job} from '../Interfaces/Job';
 import {User} from '../Interfaces/User';
-import { getSessionStorage, uploadFileHelper, getUser, deleteJob } from '../firebase';
+import { getSessionStorage, uploadFileHelper, getUser, deleteJob, getAppliedJob} from '../firebase';
 
 @Component({
   selector: 'app-job-description',
@@ -27,12 +27,13 @@ export class JobDescriptionComponent implements OnInit {
   userEmail : string
   keys: string
   file: File
+  applied: Boolean
   constructor(private router:Router){ 
     this.job = this.router.getCurrentNavigation()?.extras.state?.['jobDetails'];
     this.userEmail = getSessionStorage('userEmail') 
     this.keys = Object.keys(this.userEmail)[0];
     this.file = null;
-
+    this.applied = false;
     if(this.keys == 'false'){
       this.email = false;
     }
@@ -47,6 +48,7 @@ export class JobDescriptionComponent implements OnInit {
   async handleUserData(){
     this.user = await getUser(this.userEmail);
     this.user.isAdmin = this.user.isAdmin == this.job.provider? 'true' : 'false';
+    this.applied = await getAppliedJob(this.userEmail, this.job.provider, this.job.name)
   }
 
   onChange(event){
@@ -63,6 +65,6 @@ export class JobDescriptionComponent implements OnInit {
 
   onUpload(){
     console.log(this.file);
-    uploadFileHelper(this.file, this.job.name, this.userEmail)
+    uploadFileHelper(this.file, this.job.provider, this.job.name, this.userEmail)
   }
 }
