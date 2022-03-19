@@ -6,6 +6,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { JobDescriptionComponent } from './job-description/job-description.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { AddJobComponent } from './add-job/add-job.component';
+import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component'
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'job-description', component: JobDescriptionComponent},
   {path: 'profile', component: ProfilePageComponent},
   {path: 'addJob', component: AddJobComponent},
+  {path: 'appliedJobs', component:AppliedJobsComponent},
 ];
 
 @NgModule({

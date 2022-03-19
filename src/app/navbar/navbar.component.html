@@ -13,6 +13,11 @@
           <a class="nav-link" routerLink="/addJob" >Add Job</a>
         </div>
       </li>
+      <li class="nav-item">
+        <div *ngIf = "user.isAdmin == 'false' && email">
+          <a class="nav-link" routerLink="/appliedJobs">Applied Jobs</a>
+        </div>
+      </li>
       <li>
         <div *ngIf = "email">
           <a class="nav-link" routerLink = "/profile">Profile</a> 

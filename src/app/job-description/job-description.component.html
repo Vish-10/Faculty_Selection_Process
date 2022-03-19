@@ -3,29 +3,38 @@
 <div class="container">
     <div class="card">
         <div class="card-body">
-        <h5 class="card-title">Role: {{job.name}}</h5><br />
-        <h6 class="card-subtitle mb-2">Provider: {{job.provider}}</h6><br >
-        <h6>Job Description:</h6>
-        <p class="card-text">{{job.JD}}</p><br/>
-        <h6>Eligibilty:</h6>
-        <p class="card-text">{{job.eligibilty}}</p><br/>
-        <p class="card-text"><span style = "font-weight: 600;">Deadline: </span>{{job.deadline}}</p><br/>
-        <div *ngIf= "user.isAdmin == 'false'">
-            <div *ngIf = "email && !applied">
-                Resume: <input type = "file" id = "resume" name = "resume" (change) = "onChange($event)" accept=".pdf"><br/><br/>
-                <a class="btn btn-primary" (click) = "onUpload()">Apply</a>
+            <h5 class="card-title">Role: {{job.name}}</h5><br />
+            <h6 class="card-subtitle mb-2">Provider: {{job.provider}}</h6><br >
+            <h6>Job Description:</h6>
+            <p class="card-text">{{job.JD}}</p><br/>
+            <h6>Eligibilty:</h6>
+            <p class="card-text">{{job.eligibilty}}</p><br/>
+            <p class="card-text"><span style = "font-weight: 600;">Deadline: </span>{{job.deadline}}</p><br/>
+            <div *ngIf= "user.isAdmin == 'false'">
+                <div *ngIf = "email && !applied">
+                    Resume: <input type = "file" id = "resume" name = "resume" (change) = "onChange($event)" accept=".pdf"><br/><br/>
+                    <a class="btn btn-primary" (click) = "onUpload()">Apply</a>
+                </div>
+                <div *ngIf = "!email">
+                    Login to apply
+                </div>
+                <div *ngIf = "applied">
+                    Applied
+                </div>
             </div>
-            <div *ngIf = "!email">
-                Login to apply
-            </div>
-            <div *ngIf = "applied">
-                Applied
+            <div *ngIf= "user.isAdmin == 'true'"><br />
+                <a class = "btn btn-danger" (click)="handleDelete()" routerLink="/home-page">Delete</a>&nbsp;&nbsp;
+                <a class = "btn btn-warning" (click)="handleEdit()" routerLink="/home-page">Edit</a>
             </div>
         </div>
-        <div *ngIf= "user.isAdmin == 'true'"><br />
-            <a class = "btn btn-danger" (click)="handleDelete()" routerLink="/home-page">Delete</a>&nbsp;&nbsp;
-            <a class = "btn btn-warning" (click)="handleEdit()" routerLink="/home-page">Edit</a>
-        </div>
+    </div><br/>
+    <div *ngIf= "user.isAdmin == 'true'">
+        <h5>Applied Applicants</h5>
+        <br/>
+        <div class="card" *ngFor="let a of data;let indexOfelement=index;" >
+            <div class="card-body">
+                <h6>{{indexOfelement + 1}}.    {{a.firstname}} {{a.lastname}}</h6>
+            </div>
         </div>
     </div>
 </div>

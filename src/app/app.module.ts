@@ -11,6 +11,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { JobDescriptionComponent } from './job-description/job-description.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { AddJobComponent } from './add-job/add-job.component';
+import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AddJobComponent } from './add-job/add-job.component';
     NavbarComponent,
     JobDescriptionComponent,
     ProfilePageComponent,
-    AddJobComponent
+    AddJobComponent,
+    AppliedJobsComponent
   ],
   imports: [
     BrowserModule,

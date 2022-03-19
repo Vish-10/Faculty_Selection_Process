@@ -141,14 +141,34 @@ export function uploadFileHelper(file, jobProvider, jobName, userEmail){
   });
 }
 
-export async function getAppliedJob(email, provider, jobName){
-  var q = query(collection(db, "appliedJobs"), where("email", "==", email));
-  q = query(collection(db, "appliedJobs"), where("provider", "==", provider));
-  q = query(collection(db, "appliedJobs"), where("name", "==", jobName));
+export async function getAppliedStatus(email, provider, jobName){
+  var q = query(collection(db, "appliedJobs"), where("user", "==", email), where("provider", "==", provider), where("name", "==", jobName));
   var tempApplication;
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach(doc => {
     tempApplication = doc.data();
   })
   return tempApplication? true : false;
+}
+
+export async function getJobApplicants(provider, jobName) {
+  var q = query(collection(db, "appliedJobs"), where("provider", "==", provider), where("name", "==", jobName));
+  var applicants = []
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach(doc => {
+    console.log("in")
+    applicants.push(doc.data());
+  })
+  return applicants;
+}
+
+export async function getAppliedJobs(email) {
+  var q = query(collection(db, "appliedJobs"), where("user", "==", email));
+  var jobs = []
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach(doc => {
+    console.log("in")
+    jobs.push(doc.data());
+  })
+  return jobs;
 }

@@ -4,13 +4,15 @@
     <table class="table table-striped">
       <thead>
         <tr>
+          <th scope="col">No.</th>
           <th scope="col">Name</th>
           <th scope="col">Provider</th>
           <th scope="col">Deadline</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let d of data" (click)="jobdescription(d)">
+        <tr *ngFor="let d of data;let indexOfelement=index;" (click)="jobdescription(d)">
+          <td>{{indexOfelement + 1}}</td>
           <td >{{d.name}}</td>
           <td>{{d.provider}}</td>
           <td>{{d.deadline}}</td>
