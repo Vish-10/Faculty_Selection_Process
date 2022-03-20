@@ -120,7 +120,6 @@ export async function getAllJobs(){
 }
 
 export async function updateJob(job: Job){
-  console.log('called')
   await setDoc(doc(db, "jobs", job.id), job);
 }
 
@@ -156,7 +155,6 @@ export async function getJobApplicants(provider, jobName) {
   var applicants = []
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach(doc => {
-    console.log("in")
     applicants.push(doc.data());
   })
   return applicants;
@@ -167,7 +165,6 @@ export async function getAppliedJobs(email) {
   var jobs = []
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach(doc => {
-    console.log("in")
     jobs.push(doc.data());
   })
   return jobs;

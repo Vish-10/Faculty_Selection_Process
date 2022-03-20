@@ -59,8 +59,6 @@ export class JobDescriptionComponent implements OnInit {
     console.log(this.data)
     this.user.isAdmin = this.user.isAdmin == this.job.provider? 'true' : 'false';
     this.applied = await getAppliedStatus(this.userEmail, this.job.provider, this.job.name)
-
-    
   }
 
   onChange(event){
@@ -73,6 +71,11 @@ export class JobDescriptionComponent implements OnInit {
 
   handleDelete(){
     deleteJob(this.job)
+  }
+
+  viewApplicantDetails(email){
+    console.log(email)
+    this.router.navigateByUrl("/profile", {state: {userEmail: email}})
   }
 
   onUpload(){

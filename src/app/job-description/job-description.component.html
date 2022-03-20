@@ -10,7 +10,7 @@
             <h6>Eligibilty:</h6>
             <p class="card-text">{{job.eligibilty}}</p><br/>
             <p class="card-text"><span style = "font-weight: 600;">Deadline: </span>{{job.deadline}}</p><br/>
-            <div *ngIf= "user.isAdmin == 'false'">
+            <div *ngIf= "user.isAdmin == 'false'" class="text-center">
                 <div *ngIf = "email && !applied">
                     Resume: <input type = "file" id = "resume" name = "resume" (change) = "onChange($event)" accept=".pdf"><br/><br/>
                     <a class="btn btn-primary" (click) = "onUpload()">Apply</a>
@@ -22,7 +22,7 @@
                     Applied
                 </div>
             </div>
-            <div *ngIf= "user.isAdmin == 'true'"><br />
+            <div *ngIf= "user.isAdmin == 'true'" class="text-center"><br />
                 <a class = "btn btn-danger" (click)="handleDelete()" routerLink="/home-page">Delete</a>&nbsp;&nbsp;
                 <a class = "btn btn-warning" (click)="handleEdit()" routerLink="/home-page">Edit</a>
             </div>
@@ -31,10 +31,13 @@
     <div *ngIf= "user.isAdmin == 'true'">
         <h5>Applied Applicants</h5>
         <br/>
-        <div class="card" *ngFor="let a of data;let indexOfelement=index;" >
-            <div class="card-body">
-                <h6>{{indexOfelement + 1}}.    {{a.firstname}} {{a.lastname}}</h6>
+        <div *ngFor="let a of data;let indexOfelement=index;">
+            <div class="card"  id="applicants">
+                <div class="card-body" (click)="viewApplicantDetails(a.email)">
+                    <h6>{{indexOfelement + 1}}. {{a.firstname}} {{a.lastname}}</h6>
+                </div>
             </div>
+            <br/>
         </div>
     </div>
 </div>

@@ -38,7 +38,6 @@ user: User = {
   constructor(private router: Router) { 
     this.email = getSessionStorage("userEmail")
     var temp = this.router.getCurrentNavigation()?.extras.state?.['jobdetails'];
-    console.log(temp)
     this.init();
     if (temp) {
       this.job = temp
