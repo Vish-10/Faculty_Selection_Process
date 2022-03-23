@@ -6,7 +6,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { JobDescriptionComponent } from './job-description/job-description.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { AddJobComponent } from './add-job/add-job.component';
-import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component'
+import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
+import { ModifyUsernamePasswordComponent } from './modify-username-password/modify-username-password.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfilePageComponent},
   {path: 'addJob', component: AddJobComponent},
   {path: 'appliedJobs', component:AppliedJobsComponent},
+  {path: 'modify', component:ModifyUsernamePasswordComponent},
 ];
 
 @NgModule({

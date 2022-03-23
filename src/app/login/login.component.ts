@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {User} from '../Interfaces/User';
-import {login, addSessionStorage} from '../firebase';
+import {login, addSessionStorage, forgotPassword} from '../firebase';
 import { Router } from '@angular/router';
 
 @Component({
@@ -35,6 +35,10 @@ export class LoginComponent implements OnInit {
       addSessionStorage('userEmail', this.user.email);
       this.router.navigateByUrl('/home-page', {state: {email: this.user.email}})
     }
+  }
+
+  async handleForgotPassword(){
+    forgotPassword(this.user.email)
   }
 
 }

@@ -73,8 +73,8 @@
                         <!-- Form Group (Address)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="address">Address</label>
-                            <input *ngIf="!flag" class="form-control" id="address" name = "address" type="text" value="{{user.email}}" [(ngModel)] = "user.address">
-                            <input *ngIf="flag" disabled class="form-control" id="address" name = "address" type="text" value="{{user.email}}" [(ngModel)] = "user.address">
+                            <input *ngIf="!flag" class="form-control" id="address" name = "address" type="text" value="{{user.address}}" [(ngModel)] = "user.address">
+                            <input *ngIf="flag" disabled class="form-control" id="address" name = "address" type="text" value="{{user.address}}" [(ngModel)] = "user.address">
                         </div>
                         <!-- Save changes button-->
                         <div class="text-center">
@@ -84,5 +84,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="text-center">
+        <button *ngIf="!flag" class="btn btn-primary" type="button" routerLink="/modify">Modify Password</button>
     </div>
 </div>
