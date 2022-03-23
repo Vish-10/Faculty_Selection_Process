@@ -14,7 +14,7 @@
                     <div *ngIf="!flag" class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                     <!-- Profile picture upload button-->
                     <button *ngIf="!flag" class="btn btn-primary" type="button">Upload new image</button>
-                    <br><br><button *ngIf="flag" class="btn btn-primary" type="button">Download Resume</button>
+                    <br><br><button *ngIf="flag" class="btn btn-primary" type="button" (click)="handleResumeDownload()">Download Resume</button>
                 </div>
             </div>
         </div>
@@ -73,7 +73,7 @@
                         <!-- Form Group (Address)-->
                         <div class="mb-3">
                             <label class="small mb-1" for="address">Address</label>
-                            <input *ngIf="!flag" class="form-control" id="address" name = "address" type="text" value="{{user.address}}" [(ngModel)] = "user.address">
+                            <input *ngIf="!flag" class="form-control" id="address" name = "address" type="text" value="{{user.address}" [(ngModel)] = "user.address">
                             <input *ngIf="flag" disabled class="form-control" id="address" name = "address" type="text" value="{{user.address}}" [(ngModel)] = "user.address">
                         </div>
                         <!-- Save changes button-->
