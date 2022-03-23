@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../Interfaces/User';
-import { getUser, getSessionStorage, updateUserData } from '../firebase';
+import { getUser, getSessionStorage, updateUserData, downloadResume } from '../firebase';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,11 +23,13 @@ export class ProfilePageComponent implements OnInit {
     isAdmin: "false"
   }
   flag = false
-
+  role: string;
+  email: string;
   constructor(private router: Router) { 
-    var email = this.router.getCurrentNavigation()?.extras.state?.['userEmail'];
-    if (email){
-      this.init(email);
+    this.email = this.router.getCurrentNavigation()?.extras.state?.['userEmail'];
+    this.role = this.router.getCurrentNavigation()?.extras.state?.['role'];
+    if (this.email){
+      this.init(this.email);
       this.flag = true;
     }
     else{
@@ -44,6 +46,10 @@ export class ProfilePageComponent implements OnInit {
 
   async onSubmit(){
     updateUserData(this.user)
+  }
+
+  async handleResumeDownload(){
+    downloadResume(this.role, this.email)
   }
 
 }

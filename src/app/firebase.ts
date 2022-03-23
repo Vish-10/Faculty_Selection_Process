@@ -6,7 +6,7 @@ import { collection, addDoc, query, setDoc, where, getDocs, updateDoc, doc } fro
 import { getFirestore, deleteDoc } from "firebase/firestore"
 import {User} from './Interfaces/User';
 import {Job} from './Interfaces/Job';
-import { getStorage, ref, uploadBytes } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getBytes, getDownloadURL } from "firebase/storage";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -168,4 +168,15 @@ export async function getAppliedJobs(email) {
     jobs.push(doc.data());
   })
   return jobs;
+}
+
+
+export async function downloadResume(role, email){
+  var userEmail = getSessionStorage("userEmail")
+  const user = await getUser(userEmail);
+  const storagePath = user.isAdmin + '/' + role + '/' + email;
+  getDownloadURL(ref(storage, storagePath))
+  .then(url => {
+    window.open(url, '_blank');
+  })
 }
