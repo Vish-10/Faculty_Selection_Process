@@ -12,6 +12,7 @@ import { JobDescriptionComponent } from './job-description/job-description.compo
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { AddJobComponent } from './add-job/add-job.component';
 import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
+import { ModifyUsernamePasswordComponent } from './modify-username-password/modify-username-password.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
     JobDescriptionComponent,
     ProfilePageComponent,
     AddJobComponent,
-    AppliedJobsComponent
+    AppliedJobsComponent,
+    ModifyUsernamePasswordComponent
   ],
   imports: [
     BrowserModule,

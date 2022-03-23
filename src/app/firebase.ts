@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, updatePassword, updateEmail, sendPasswordResetEmail   } from "firebase/auth";
 import * as auth1 from "firebase/auth"
 import { collection, addDoc, query, setDoc, where, getDocs, updateDoc, doc } from "firebase/firestore"; 
 import { getFirestore, deleteDoc } from "firebase/firestore"
@@ -182,6 +182,32 @@ export async function getAppliedJobs(email) {
   return jobs;
 }
 
+export function forgotPassword(email){
+  console.log(email)
+  sendPasswordResetEmail(auth, email)
+  .then(() => {
+    console.log("verification mail sent")
+    // Password reset email sent!
+    // ..
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // ..
+  });
+}
+
+export function changePassword(newPassword){
+  const user = auth.currentUser;
+
+  updatePassword(user, newPassword).then(() => {
+    // Update successful.
+    console.log("Update Done")
+  }).catch((error) => {
+    // An error ocurred
+    // ...
+    console.log(error)
+  });
 
 export async function downloadResume(role, email){
   var userEmail = getSessionStorage("userEmail")
