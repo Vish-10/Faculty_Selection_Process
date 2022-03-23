@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import * as auth1 from "firebase/auth"
 import { collection, addDoc, query, setDoc, where, getDocs, updateDoc, doc } from "firebase/firestore"; 
 import { getFirestore, deleteDoc } from "firebase/firestore"
 import {User} from './Interfaces/User';
@@ -59,7 +60,18 @@ export async function login(email: string, password: string){
   return flag;
 }
 
-async function addUserData(user: User){//dont save pass
+//google auth
+ export function GoogleAuth() {
+   console.log("called")
+  return this.AuthLogin(new auth1.GoogleAuthProvider()).then((res: any) => {
+    if (res) {
+      this.router.navigate(['profile']);
+    }
+  });
+}
+
+
+export async function addUserData(user: User){//dont save pass
   const newUser = await addDoc(collection(db, 'users'), user)
   console.log(newUser);
 }
