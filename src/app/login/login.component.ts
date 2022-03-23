@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { getAuth, signInWithEmailAndPassword ,GoogleAuthProvider,signInWithPopup} from "firebase/auth";
 import {User} from '../Interfaces/User';
-import {login, addSessionStorage, GoogleAuth,addUserData, getUser, forgotPassword} from '../firebase';
+import {login, addSessionStorage, addUserData, getUser, forgotPassword} from '../firebase';
 import { Router } from '@angular/router';
 import { userInfo } from 'os';
 

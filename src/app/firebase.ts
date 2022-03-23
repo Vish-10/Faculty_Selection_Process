@@ -1,13 +1,12 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, updatePassword, updateEmail, sendPasswordResetEmail   } from "firebase/auth";
-import * as auth1 from "firebase/auth"
+import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, updatePassword, sendPasswordResetEmail   } from "firebase/auth";
 import { collection, addDoc, query, setDoc, where, getDocs, updateDoc, doc } from "firebase/firestore"; 
 import { getFirestore, deleteDoc } from "firebase/firestore"
 import {User} from './Interfaces/User';
 import {Job} from './Interfaces/Job';
-import { getStorage, ref, uploadBytes, getBytes, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -59,17 +58,6 @@ export async function login(email: string, password: string){
     })
   return flag;
 }
-
-//google auth
- export function GoogleAuth() {
-   console.log("called")
-  return this.AuthLogin(new auth1.GoogleAuthProvider()).then((res: any) => {
-    if (res) {
-      this.router.navigate(['profile']);
-    }
-  });
-}
-
 
 export async function addUserData(user: User){//dont save pass
   const newUser = await addDoc(collection(db, 'users'), user)
@@ -208,6 +196,7 @@ export function changePassword(newPassword){
     // ...
     console.log(error)
   });
+}
 
 export async function downloadResume(role, email){
   var userEmail = getSessionStorage("userEmail")
