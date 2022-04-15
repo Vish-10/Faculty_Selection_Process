@@ -136,7 +136,7 @@ export function uploadFileHelper(file, jobProvider, jobName, userEmail){
   const fileName = jobProvider + '/' + jobName + '/' + userEmail;
   const storageRef = ref(storage, fileName);
   uploadBytes(storageRef, file).then(async (snapshot) => {
-    const newApplication = await addDoc(collection(db, 'appliedJobs'), {user: userEmail, provider: jobProvider, name: jobName, status: 'pending'})
+    const newApplication = await addDoc(collection(db, 'appliedJobs'), {user: userEmail, provider: jobProvider, name: jobName, status: 'Pending'})
   });
 }
 
@@ -206,4 +206,27 @@ export async function downloadResume(role, email){
   .then(url => {
     window.open(url, '_blank');
   })
+}
+
+export async function updateJobStatus(email, jobName, provider, value){
+  console.log(email, jobName, provider)
+  const q = query(collection(db, "appliedJobs"), where("provider", "==", provider), where("name", "==", jobName), where("user", "==", email));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach(async (tempUser) => {
+    console.log("inside")
+    const userRef = doc(db, "appliedJobs", tempUser.id);
+    await updateDoc(userRef, {
+      status: value,
+    });//show alert
+  });
+}
+
+export async function getJobStatus(email, jobName, provider,) {
+  var q = query(collection(db, "appliedJobs"), where("provider", "==", provider), where("name", "==", jobName), where("user", "==", email));
+  var job;
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach(doc => {
+    job=doc.data();
+  })
+  return job.status;
 }

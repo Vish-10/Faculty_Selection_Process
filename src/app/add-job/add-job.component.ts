@@ -61,8 +61,4 @@ user: User = {
       updateJob(this.job)
   }
 
-  handleUpdate(){
-    
-  }
-
 }

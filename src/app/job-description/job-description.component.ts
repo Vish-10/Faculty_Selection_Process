@@ -75,7 +75,7 @@ export class JobDescriptionComponent implements OnInit {
 
   viewApplicantDetails(email){
     console.log(email)
-    this.router.navigateByUrl("/profile", {state: {userEmail: email, role: this.job.name}})
+    this.router.navigateByUrl("/profile", {state: {userEmail: email, role: this.job.name, provider: this.job.provider}})
   }
 
   onUpload(){
