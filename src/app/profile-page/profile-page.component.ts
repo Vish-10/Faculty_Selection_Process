@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../Interfaces/User';
-import { getUser, getSessionStorage, updateUserData, downloadResume } from '../firebase';
+import { getUser, getSessionStorage, updateUserData, downloadResume, updateJobStatus, getJobStatus } from '../firebase';
 import { Router } from '@angular/router';
 
 @Component({
@@ -23,11 +23,14 @@ export class ProfilePageComponent implements OnInit {
     isAdmin: "false"
   }
   flag = false
+  selected = false
   role: string;
   email: string;
+  provider: string
   constructor(private router: Router) { 
     this.email = this.router.getCurrentNavigation()?.extras.state?.['userEmail'];
     this.role = this.router.getCurrentNavigation()?.extras.state?.['role'];
+    this.provider = this.router.getCurrentNavigation()?.extras.state?.['provider'];
     if (this.email){
       this.init(this.email);
       this.flag = true;
@@ -42,14 +45,21 @@ export class ProfilePageComponent implements OnInit {
 
   async init(email){
     this.user = await getUser(email)
+    if(this.flag && await getJobStatus(this.user.email, this.role, this.provider) != "Pending"){
+      this.selected = true;
+    }
   }
 
-  async onSubmit(){
+  onSubmit(){
     updateUserData(this.user)
   }
 
-  async handleResumeDownload(){
+  handleResumeDownload(){
     downloadResume(this.role, this.email)
+  }
+
+  async handleStatus(status){
+    await updateJobStatus(this.user.email, this.role, this.provider, status);
   }
 
 }
