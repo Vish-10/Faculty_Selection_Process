@@ -87,12 +87,13 @@
     </div>
     <div class="text-center">
         <button *ngIf="!flag" class="btn btn-primary" type="button" routerLink="/modify">Modify Password</button>
+        <button class = "btn btn-danger" type = "button" (click) = "handleDeleteUser()">Delete account</button>
     </div>
 </div>
 <div *ngIf="flag" class = "text-center"  style="color: white;">
-    <button *ngIf="!selected" class="btn btn-primary" type="button" (click)="handleStatus('Accepted')" routerLink="/home-page">Accept</button>
+    <button *ngIf="!selected" class="btn btn-success" type="button" (click)="handleStatus('Accepted')" routerLink="/home-page">Accept</button>
     ________
-    <button *ngIf="!selected" class="btn btn-primary" type="button" (click)="handleStatus('Rejected')" routerLink="/home-page">Reject</button>
-    <h4 *ngIf="selected" style="color: black;"> Already Selected </h4>
+    <button *ngIf="!selected" class="btn btn-danger" type="button" (click)="handleStatus('Rejected')" routerLink="/home-page">Reject</button>
+    <h4 *ngIf="selected" style="color: black;"> Already Chosen</h4>
 </div>
 <br><br>

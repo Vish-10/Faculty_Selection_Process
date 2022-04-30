@@ -56,7 +56,6 @@ export class JobDescriptionComponent implements OnInit {
     for (const details of this.applicants){
       this.data.push(await getUser(details.user))
     }
-    console.log(this.data)
     this.user.isAdmin = this.user.isAdmin == this.job.provider? 'true' : 'false';
     this.applied = await getAppliedStatus(this.userEmail, this.job.provider, this.job.name)
   }

@@ -6,7 +6,7 @@ import { collection, addDoc, query, setDoc, where, getDocs, updateDoc, doc } fro
 import { getFirestore, deleteDoc } from "firebase/firestore"
 import {User} from './Interfaces/User';
 import {Job} from './Interfaces/Job';
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "firebase/storage";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -229,4 +229,25 @@ export async function getJobStatus(email, jobName, provider,) {
     job=doc.data();
   })
   return job.status;
+}
+
+export async function deleteUserAccount(email){
+  const users = query(collection(db, 'users'), where('email', '==', email))
+  const querySnap = await getDocs(users);
+  var tempUserId;
+  querySnap.forEach((docs) => {
+    tempUserId = docs.id;
+  })
+  await deleteDoc(doc(db, "users", tempUserId));
+  var q = query(collection(db, "appliedJobs"), where("user", "==", email));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach(docT => {
+    var temp = docT.data()
+    const desertRef = ref(storage, temp['provider']+ '/' + temp['name'] + '/' + temp['user']);
+    deleteObject(desertRef).then(async () => {
+      await deleteDoc(doc(db, 'appliedJobs', docT.id))
+    }).catch((error) => {
+      console.log("error")
+    });
+  })
 }

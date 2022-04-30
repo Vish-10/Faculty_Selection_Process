@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../Interfaces/User';
-import { getUser, getSessionStorage, updateUserData, downloadResume, updateJobStatus, getJobStatus } from '../firebase';
+import { getUser, getSessionStorage, updateUserData, downloadResume, updateJobStatus, getJobStatus, deleteUserAccount } from '../firebase';
 import { Router } from '@angular/router';
 
 @Component({
@@ -60,6 +60,12 @@ export class ProfilePageComponent implements OnInit {
 
   async handleStatus(status){
     await updateJobStatus(this.user.email, this.role, this.provider, status);
+  }
+
+  async handleDeleteUser(){
+    console.log(this.user.email);
+    await deleteUserAccount(this.user.email);
+    this.router.navigateByUrl('/');
   }
 
 }
