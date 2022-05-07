@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, updatePassword, sendPasswordResetEmail   } from "firebase/auth";
+import { getAuth, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, updatePassword, sendPasswordResetEmail, ProviderId   } from "firebase/auth";
 import { collection, addDoc, query, setDoc, where, getDocs, updateDoc, doc } from "firebase/firestore"; 
 import { getFirestore, deleteDoc } from "firebase/firestore"
 import {User} from './Interfaces/User';
@@ -136,7 +136,7 @@ export function uploadFileHelper(file, jobProvider, jobName, userEmail){
   const fileName = jobProvider + '/' + jobName + '/' + userEmail;
   const storageRef = ref(storage, fileName);
   uploadBytes(storageRef, file).then(async (snapshot) => {
-    const newApplication = await addDoc(collection(db, 'appliedJobs'), {user: userEmail, provider: jobProvider, name: jobName, status: 'Pending'})
+    const newApplication = await addDoc(collection(db, 'appliedJobs'), {user: userEmail, provider: jobProvider, name: jobName, status: 'Pending', documentVerificationSlot: ''})
   });
 }
 
@@ -249,5 +249,88 @@ export async function deleteUserAccount(email){
     }).catch((error) => {
       console.log("error")
     });
+  })
+}
+
+export async function getAllSlots(provider, jobName){
+  var q = query(collection(db, "documentVerificationSlots"), where("provider", "==", provider), where("jobName", "==", jobName));
+  var slots = [];
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach(doc => {
+    slots.push(doc.data());
+  })
+  return slots;
+}
+
+export async function addSlot(provider, jobName, date, time, seats){
+  const newSlot = await addDoc(collection(db, 'documentVerificationSlots'), {provider: provider, jobName: jobName, date: date, time: time, maxSeats: seats, remainingSeats: seats});
+  //add alert
+}
+
+export async function withdrawApplication(email, jobName, provider) {
+  var q = query(collection(db, "appliedJobs"), where("user", "==", email), where("name", "==", jobName),where("provider", "==", provider));
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach(docT => {
+    var temp = docT.data()
+    const desertRef = ref(storage, temp['provider']+ '/' + temp['name'] + '/' + temp['user']);
+    deleteObject(desertRef).then(async () => {
+      await deleteDoc(doc(db, 'appliedJobs', docT.id))
+    }).catch((error) => {
+      console.log("error")
+    });
+  })
+}
+
+export async function updateDocSlot(date, time, jobName, provider, email){
+  var q = query(collection(db, "appliedJobs"), where("provider", "==", provider), where("name", "==", jobName), where("user", "==", email));
+  var querySnapshot = await getDocs(q);
+  querySnapshot.forEach(async (tempUser) => {
+    console.log("inside")
+    if (tempUser.data()['documentVerificationSlot'] == ""){
+      var q = query(collection(db, "documentVerificationSlots"), where("provider", "==", provider), where("jobName", "==", jobName), where("date", "==", date), where("time", "==", time));
+      var querySnapshot1 = await getDocs(q);
+      querySnapshot1.forEach(async (data) =>{
+        if (data.data()['remainingSeats'] > 0){
+          const userRef = doc(db, "appliedJobs", tempUser.id);
+          await updateDoc(userRef, {
+            documentVerificationSlot: date + "+" + time,
+          });
+          console.log(data.id);
+          const docSlotRef = doc(db, 'documentVerificationSlots', data.id);
+          await updateDoc(docSlotRef, {
+            remainingSeats: (data.data()['remainingSeats'] - 1),
+          })
+        }
+        else{
+          console.log("Error No slots available");//alert
+        }
+      })
+    }
+    else{
+      var q = query(collection(db, "documentVerificationSlots"), where("provider", "==", provider), where("jobName", "==", jobName), where("date", "==", date), where("time", "==", time));
+      var querySnapshot1 = await getDocs(q);
+      querySnapshot1.forEach(async (data) =>{
+        if (data.data()['remainingSeats'] > 0){
+          const userRef = doc(db, "appliedJobs", tempUser.id);
+          var oldDocumentVerficationSlot = tempUser.data()['documentVerificationSlot'].split("+")
+          var q = query(collection(db, "documentVerificationSlots"), where("provider", "==", provider), where("jobName", "==", jobName), where("date", "==", oldDocumentVerficationSlot[0]), where("time", "==", oldDocumentVerficationSlot[1]));
+          var querySnapshot2 = await getDocs(q);
+          querySnapshot2.forEach(async (oldSlot) => {
+            const docSlotRefOld = doc(db, 'documentVerificationSlots', oldSlot.id);
+            await updateDoc(docSlotRefOld, {
+              remainingSeats: oldSlot.data()['remainingSeats'] + 1,
+            })
+          })
+          await updateDoc(userRef, {
+            documentVerificationSlot: date + "+" + time,
+          });
+          const docSlotRef = doc(db, 'documentVerificationSlots', data.id);
+          await updateDoc(docSlotRef, {
+            remainingSeats: data.data()['remainingSeats'] - 1,
+          })
+        }
+      });
+    }
+    
   })
 }

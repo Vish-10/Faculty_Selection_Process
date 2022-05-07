@@ -8,6 +8,8 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { AddJobComponent } from './add-job/add-job.component';
 import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
 import { ModifyUsernamePasswordComponent } from './modify-username-password/modify-username-password.component';
+import { DocManageSlotsComponent } from './doc-manage-slots/doc-manage-slots.component';
+import { BookslotChoiceComponent } from './bookslot-choice/bookslot-choice.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -19,6 +21,8 @@ const routes: Routes = [
   {path: 'addJob', component: AddJobComponent},
   {path: 'appliedJobs', component:AppliedJobsComponent},
   {path: 'modify', component:ModifyUsernamePasswordComponent},
+  {path: 'manageslots', component:DocManageSlotsComponent},
+  {path: 'bookSlotChoice', component:BookslotChoiceComponent},
 ];
 
 @NgModule({
