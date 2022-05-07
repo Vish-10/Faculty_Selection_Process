@@ -23,10 +23,10 @@ export class ProfilePageComponent implements OnInit {
     isAdmin: "false"
   }
   flag = false
-  selected = false
+  jobStatus: string;
   role: string;
   email: string;
-  provider: string
+  provider: string;
   constructor(private router: Router) { 
     this.email = this.router.getCurrentNavigation()?.extras.state?.['userEmail'];
     this.role = this.router.getCurrentNavigation()?.extras.state?.['role'];
@@ -45,8 +45,8 @@ export class ProfilePageComponent implements OnInit {
 
   async init(email){
     this.user = await getUser(email)
-    if(this.flag && await getJobStatus(this.user.email, this.role, this.provider) != "Pending"){
-      this.selected = true;
+    if(this.flag){
+      this.jobStatus = await getJobStatus(this.user.email, this.role, this.provider);
     }
   }
 
@@ -66,6 +66,10 @@ export class ProfilePageComponent implements OnInit {
     console.log(this.user.email);
     await deleteUserAccount(this.user.email);
     this.router.navigateByUrl('/');
+  }
+
+  async barUser(){
+    await deleteUserAccount(this.email);
   }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getAuth, signInWithEmailAndPassword ,GoogleAuthProvider,signInWithPopup} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword ,GoogleAuthProvider,signInWithPopup,GithubAuthProvider} from "firebase/auth";
 import {User} from '../Interfaces/User';
 import {login, addSessionStorage, addUserData, getUser, forgotPassword} from '../firebase';
 import { Router } from '@angular/router';
@@ -78,4 +78,40 @@ export class LoginComponent implements OnInit {
     this.router.navigateByUrl('/profile')
     }
  }
+  async githubSignin() {
+    const provider = new GithubAuthProvider();
+    var flag = false;
+    var tempemail = "";
+    await signInWithPopup(this.auth,provider).then(async function(result) {
+
+       let temp = { firstname: result.user.displayName,
+       lastname: '',
+       phoneNumber: 91,
+       email: result.user.email,
+       address: '',
+       password: '',
+       state: '',
+       city: '',
+       DOB:new Date(),
+       isAdmin: "false"}
+
+       const checkUser = await getUser(temp.email);
+       if(!checkUser)
+        addUserData(temp)
+      flag = true;
+      tempemail = temp.email
+      
+      }).catch(function(error) {
+       var errorCode = error.code;
+       var errorMessage = error.message;
+     
+       console.log(error.code)
+       console.log(error.message)
+    });
+    if(flag){
+      addSessionStorage('userEmail', tempemail);
+    this.router.navigateByUrl('/profile')
+    }
+ }
+
 }

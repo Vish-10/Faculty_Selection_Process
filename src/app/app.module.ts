@@ -13,6 +13,8 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
 import { AddJobComponent } from './add-job/add-job.component';
 import { AppliedJobsComponent } from './applied-jobs/applied-jobs.component';
 import { ModifyUsernamePasswordComponent } from './modify-username-password/modify-username-password.component';
+import { DocManageSlotsComponent } from './doc-manage-slots/doc-manage-slots.component';
+import { BookslotChoiceComponent } from './bookslot-choice/bookslot-choice.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { ModifyUsernamePasswordComponent } from './modify-username-password/modi
     ProfilePageComponent,
     AddJobComponent,
     AppliedJobsComponent,
-    ModifyUsernamePasswordComponent
+    ModifyUsernamePasswordComponent,
+    DocManageSlotsComponent,
+    BookslotChoiceComponent
   ],
   imports: [
     BrowserModule,

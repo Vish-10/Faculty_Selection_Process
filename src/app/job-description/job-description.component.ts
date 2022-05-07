@@ -81,4 +81,8 @@ export class JobDescriptionComponent implements OnInit {
     console.log(this.file);
     uploadFileHelper(this.file, this.job.provider, this.job.name, this.userEmail)
   }
+
+  handleSlots(){
+    this.router.navigateByUrl("/manageslots", {state: {role: this.job.name, provider: this.job.provider}});
+  }
 }
