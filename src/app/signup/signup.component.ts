@@ -27,9 +27,14 @@ export class SignupComponent{
   constructor(public router:Router) { }
 
   async handleSubmit(){
-    var flag =await signUp(this.user);
-    if (flag){
-      this.router.navigate(['./login'])
+    if (this.user.firstname != "" && this.user.lastname != "" && this.user.email != "" && this.user.password != ""){
+      var flag =await signUp(this.user);
+      if (flag){
+        this.router.navigate(['./login'])
+      }
+    }
+    else{
+      alert("Please Fill all required Fields");
     }
   }
 

@@ -11,7 +11,7 @@
                   </div>
                 </div>
                 <div class="row mb-3">
-                  <label for="inputPassword3" class="col-sm-2 col-form-label" >Password</label>
+                  <label for="inputPassword3" class="col-sm-2 col-form-label" >Password </label>
                   <div class="col-sm-10">
                     <input type="password" class="form-control" id="inputPassword3" [(ngModel)] = "user.password">
                   </div>
@@ -20,7 +20,7 @@
                 <a routerLink = '/signup'>Sign-Up</a>
                 <br><br>
                 <p (click)="handleForgotPassword()" style="color: darkcyan;" class="fp">Forgot Password</p>
-                <button type="submit" class="btn btn-primary" (click) = "googleSignin()">google</button>&nbsp;<br>
+                <button type="submit" class="btn btn-primary" (click) = "googleSignin()">google</button>&nbsp;
                 <button type="submit" class="btn btn-primary" (click) = "githubSignin()">github</button>&nbsp;
               </div>
         <div class = "col"></div>

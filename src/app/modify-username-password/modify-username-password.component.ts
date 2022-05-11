@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { changePassword, getSessionStorage } from '../firebase';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-modify-username-password',
@@ -12,12 +13,18 @@ export class ModifyUsernamePasswordComponent{
   password: string = ""
   oldemail: string
 
-  constructor() {
+  constructor(private router: Router) {
     this.oldemail = getSessionStorage("userEmail")
    }
 
-  handleChangePassword(){
-    changePassword(this.password)
+  async handleChangePassword(){
+    if (await changePassword(this.password)){
+      alert("Password changed successfully")
+      this.router.navigateByUrl('/profile')
+    }
+    else{
+      alert("Relogin and try to change password again")
+    }
   }
 
 }

@@ -53,6 +53,7 @@ export async function login(email: string, password: string){
       return true;
     })
     .catch((err) => {
+      alert("Incorrect EmailId or Password")
       console.log(err);
       return false;
     })
@@ -132,12 +133,18 @@ export async function logOutFirebase() {
   return flag;
 }
 
-export function uploadFileHelper(file, jobProvider, jobName, userEmail){
+export async function uploadFileHelper(file, jobProvider, jobName, userEmail){
   const fileName = jobProvider + '/' + jobName + '/' + userEmail;
   const storageRef = ref(storage, fileName);
-  uploadBytes(storageRef, file).then(async (snapshot) => {
+  var flag = await uploadBytes(storageRef, file).then(async (snapshot) => {
     const newApplication = await addDoc(collection(db, 'appliedJobs'), {user: userEmail, provider: jobProvider, name: jobName, status: 'Pending', documentVerificationSlot: ''})
+    return true;
+  }).catch((error) => {
+    alert("File not uploaded");
+    return false;
+    // ..
   });
+  return flag;
 }
 
 export async function getAppliedStatus(email, provider, jobName){
@@ -179,22 +186,24 @@ export function forgotPassword(email){
     // ..
   })
   .catch((error) => {
+    alert("Please check the EmailId")
     const errorCode = error.code;
     const errorMessage = error.message;
     // ..
   });
 }
 
-export function changePassword(newPassword){
+export async function changePassword(newPassword){
   const user = auth.currentUser;
-
-  updatePassword(user, newPassword).then(() => {
+  return await updatePassword(user, newPassword).then(() => {
     // Update successful.
     console.log("Update Done")
+    return true
   }).catch((error) => {
     // An error ocurred
     // ...
     console.log(error)
+    return false
   });
 }
 
@@ -270,10 +279,10 @@ export async function addSlot(provider, jobName, date, time, seats){
 export async function withdrawApplication(email, jobName, provider) {
   var q = query(collection(db, "appliedJobs"), where("user", "==", email), where("name", "==", jobName),where("provider", "==", provider));
   const querySnapshot = await getDocs(q);
-  querySnapshot.forEach(docT => {
+  querySnapshot.forEach(async docT => {
     var temp = docT.data()
     const desertRef = ref(storage, temp['provider']+ '/' + temp['name'] + '/' + temp['user']);
-    deleteObject(desertRef).then(async () => {
+    await deleteObject(desertRef).then(async () => {
       await deleteDoc(doc(db, 'appliedJobs', docT.id))
     }).catch((error) => {
       console.log("error")

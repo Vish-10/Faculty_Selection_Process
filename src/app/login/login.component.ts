@@ -29,15 +29,26 @@ export class LoginComponent {
   constructor(public router:Router) { }
 
   async handleSubmit(){
-    var flag = await login(this.user.email, this.user.password);
-    if (flag){
-      addSessionStorage('userEmail', this.user.email);
-      this.router.navigateByUrl('/home-page', {state: {email: this.user.email}})
+    if (this.user.email != "" && this.user.password != ""){
+      var flag = await login(this.user.email, this.user.password);
+      if (flag){
+        addSessionStorage('userEmail', this.user.email);
+        this.router.navigateByUrl('/home-page', {state: {email: this.user.email}})
+      }
     }
+    else{
+      alert("Please Fill All the Fields")
+    }
+    
   }
 
   async handleForgotPassword(){
-    forgotPassword(this.user.email)
+    if (this.user.email == ""){
+      alert("Please Enter the EmailId")
+    }
+    else{
+      forgotPassword(this.user.email)
+    }
   }
 
   async googleSignin() {

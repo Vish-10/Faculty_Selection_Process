@@ -75,9 +75,19 @@ export class JobDescriptionComponent{
     this.router.navigateByUrl("/profile", {state: {userEmail: email, role: this.job.name, provider: this.job.provider}})
   }
 
-  onUpload(){
-    console.log(this.file);
-    uploadFileHelper(this.file, this.job.provider, this.job.name, this.userEmail)
+  async onUpload(){
+    if (this.file == null){
+      alert("Please Upload Resume")
+    }
+    else{
+      console.log(this.file);
+      var flag = await uploadFileHelper(this.file, this.job.provider, this.job.name, this.userEmail)
+      if (flag){
+        this.router.navigateByUrl('/home-page')
+      alert("Job Applied Successfully")
+      }
+    }
+    
   }
 
   handleSlots(){

@@ -24,6 +24,8 @@ export class AppliedJobsComponent{
 
   async handleWithdraw(email, jobName, provider){
     await withdrawApplication(email, jobName, provider)
+    alert("Job withdraw successfull")
+    this.router.navigateByUrl('/home-page')
   }
 
   handleModelUpdate(slot){

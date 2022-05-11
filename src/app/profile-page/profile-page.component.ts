@@ -47,8 +47,9 @@ export class ProfilePageComponent {
     }
   }
 
-  onSubmit(){
-    updateUserData(this.user)
+  async onSubmit(){
+    await updateUserData(this.user)
+    alert("Changes have been updated")
   }
 
   handleResumeDownload(){
@@ -62,6 +63,7 @@ export class ProfilePageComponent {
   async handleDeleteUser(){
     console.log(this.user.email);
     await deleteUserAccount(this.user.email);
+    alert("Account deleted successfully")
     this.router.navigateByUrl('/');
   }
 

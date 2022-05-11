@@ -4,11 +4,11 @@
     <div class="row g-3 topMargin">
         <div class="row">
             <div class="col-md-6">
-                <label for="first_name" class="form-label">First Name</label>
-              <input type="text" class="form-control" placeholder="First name" aria-label="First Name" [(ngModel)] = "user.firstname">
+                <label for="first_name" class="form-label">First Name <span style="color: red;"> * </span></label>
+              <input type="text" class="form-control" placeholder="First name" aria-label="First Name" [(ngModel)] = "user.firstname" >
             </div>
             <div class="col-md-6">
-                <label for="last_name" class="form-label">Last Name</label>
+                <label for="last_name" class="form-label">Last Name <span style="color: red;"> * </span></label>
               <input type="text" class="form-control" placeholder="Last name" aria-label="Last Name" [(ngModel)] = "user.lastname">
             </div>
         </div>
@@ -23,11 +23,11 @@
             </div>
         </div>
         <div class="col-md-12">
-          <label for="inputEmail4" class="form-label">Email</label>
+          <label for="inputEmail4" class="form-label">Email <span style="color: red;"> * </span></label>
           <input type="email" class="form-control" id="inputEmail4" placeholder="Email" [(ngModel)] = "user.email"> 
         </div>
         <div class="col-md-12">
-          <label for="inputPassword4" class="form-label">Password</label>
+          <label for="inputPassword4" class="form-label">Password <span style="color: red;"> * </span></label>
           <input type="password" class="form-control" id="inputPassword4" placeholder="Password" [(ngModel)] = "user.password">
         </div>
         <div class="mb-3">
