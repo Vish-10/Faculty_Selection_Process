@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.css']
 })
 
-export class SignupComponent implements OnInit {
+export class SignupComponent{
 
   user: User = {
     firstname: '',
@@ -25,9 +25,6 @@ export class SignupComponent implements OnInit {
   }
 
   constructor(public router:Router) { }
-
-  ngOnInit(): void {
-  }
 
   async handleSubmit(){
     var flag =await signUp(this.user);

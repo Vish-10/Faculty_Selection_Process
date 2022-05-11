@@ -10,7 +10,7 @@ import { userInfo } from 'os';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   user: User = {
     firstname: '',
@@ -27,9 +27,6 @@ export class LoginComponent implements OnInit {
   auth = getAuth();
   
   constructor(public router:Router) { }
-
-  ngOnInit(): void {
-  }
 
   async handleSubmit(){
     var flag = await login(this.user.email, this.user.password);

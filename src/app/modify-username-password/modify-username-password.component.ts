@@ -6,7 +6,7 @@ import { changePassword, getSessionStorage } from '../firebase';
   templateUrl: './modify-username-password.component.html',
   styleUrls: ['./modify-username-password.component.css']
 })
-export class ModifyUsernamePasswordComponent implements OnInit {
+export class ModifyUsernamePasswordComponent{
 
   emailID: string = ""
   password: string = ""
@@ -15,9 +15,6 @@ export class ModifyUsernamePasswordComponent implements OnInit {
   constructor() {
     this.oldemail = getSessionStorage("userEmail")
    }
-
-  ngOnInit(): void {
-  }
 
   handleChangePassword(){
     changePassword(this.password)

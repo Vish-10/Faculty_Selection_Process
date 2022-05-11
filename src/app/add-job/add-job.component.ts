@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './add-job.component.html',
   styleUrls: ['./add-job.component.css']
 })
-export class AddJobComponent implements OnInit {
+export class AddJobComponent {
 
   job: Job = {
     name: "",
@@ -43,9 +43,6 @@ user: User = {
       this.job = temp
       this.flag = true
     }
-  }
-
-  ngOnInit(): void {
   }
 
   async init(){

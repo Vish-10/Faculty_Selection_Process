@@ -8,16 +8,13 @@ import { getSessionStorage, updateDocSlot } from '../firebase';
   templateUrl: './bookslot-choice.component.html',
   styleUrls: ['./bookslot-choice.component.css']
 })
-export class BookslotChoiceComponent implements OnInit {
+export class BookslotChoiceComponent{
   slot: any
   user: any
   constructor(private router:Router) {
     this.slot = this.router.getCurrentNavigation()?.extras.state?.['slot'];
     this.user = getSessionStorage("userEmail");
    }
-
-  ngOnInit(): void {
-  }
 
   async handleSubmitSlots(form: NgForm){
     var value = form.controls['choiceRadios'].value;

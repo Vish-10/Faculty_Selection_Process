@@ -91,12 +91,12 @@
     </div>
 </div>
 <div *ngIf="flag" class = "text-center"  style="color: white;">
-    <button *ngIf="jobStatus == 'Pending'" class="btn btn-success" type="button" (click)="handleStatus('Accepted')" routerLink="/home-page">Accept</button>
-    <button *ngIf="jobStatus == 'Pending'" class="btn btn-danger" type="button" (click)="handleStatus('Rejected')" routerLink="/home-page">Reject</button>
-    <button *ngIf="jobStatus == 'Accepted'" class="btn btn-success" type="button" (click)="handleStatus('Passed')" routerLink="/home-page">Pass</button>
-    <button *ngIf="jobStatus == 'Accepted'" class="btn btn-danger" type="button" (click)="handleStatus('Failed')" routerLink="/home-page">Fail</button>
-    <button *ngIf="jobStatus == 'Passed'" class="btn btn-success" type="button" (click)="handleStatus('Verification done')" routerLink="/home-page">Verfied</button>
-    <button *ngIf="jobStatus == 'Passed'" class="btn btn-danger" type="button" (click)="handleStatus('RejectedV')" routerLink="/home-page">Failed</button>
-    <button *ngIf="jobStatus == 'RejectedV'" class="btn btn-danger" type="button" (click)="barUser()" routerLink="/home-page">Bar applicant</button>
+    <button *ngIf="jobStatus === 'Pending'" class="btn btn-success" type="button" (click)="handleStatus('Accepted')" routerLink="/home-page">Accept</button>
+    <button *ngIf="jobStatus === 'Pending'" class="btn btn-danger" type="button" (click)="handleStatus('Rejected')" routerLink="/home-page">Reject</button>
+    <button *ngIf="jobStatus === 'Accepted'" class="btn btn-success" type="button" (click)="handleStatus('Passed')" routerLink="/home-page">Pass</button>
+    <button *ngIf="jobStatus === 'Accepted'" class="btn btn-danger" type="button" (click)="handleStatus('Failed')" routerLink="/home-page">Fail</button>
+    <button *ngIf="jobStatus === 'Passed'" class="btn btn-success" type="button" (click)="handleStatus('Verification done')" routerLink="/home-page">Verfied</button>
+    <button *ngIf="jobStatus === 'Passed'" class="btn btn-danger" type="button" (click)="handleStatus('RejectedV')" routerLink="/home-page">Failed</button>
+    <button *ngIf="jobStatus === 'RejectedV'" class="btn btn-danger" type="button" (click)="barUser()" routerLink="/home-page">Bar applicant</button>
 </div>
 <br><br>

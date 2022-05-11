@@ -10,7 +10,7 @@
             <h6>Eligibilty:</h6>
             <p class="card-text">{{job.eligibilty}}</p><br/>
             <p class="card-text"><span style = "font-weight: 600;">Deadline: </span>{{job.deadline}}</p><br/>
-            <div *ngIf= "user.isAdmin == 'false'" class="text-center">
+            <div *ngIf= "user.isAdmin === 'false'" class="text-center">
                 <div *ngIf = "email && !applied">
                     Resume: <input type = "file" id = "resume" name = "resume" (change) = "onChange($event)" accept=".pdf"><br/><br/>
                     <a class="btn btn-primary" (click) = "onUpload()">Apply</a>
@@ -22,14 +22,14 @@
                     Applied
                 </div>
             </div>
-            <div *ngIf= "user.isAdmin == 'true'" class="text-center"><br />
+            <div *ngIf= "user.isAdmin === 'true'" class="text-center"><br />
                 <a class = "btn btn-danger" (click)="handleDelete()" routerLink="/home-page">Delete</a>&nbsp;&nbsp;
                 <a class = "btn btn-warning" (click)="handleEdit()">Edit</a>&nbsp;&nbsp;
                 <a class = "btn btn-info" (click)="handleSlots()">Manage Slots</a>
             </div>
         </div>
     </div><br/>
-    <div *ngIf= "user.isAdmin == 'true'">
+    <div *ngIf= "user.isAdmin === 'true'">
         <h5>Applied Applicants</h5>
         <br/>
         <div *ngFor="let a of data;let indexOfelement=index;">

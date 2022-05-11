@@ -9,12 +9,12 @@
         <a class="nav-link" aria-current="page" href="#">Home</a>
       </li>
       <li class="nav-item">
-        <div *ngIf = "user.isAdmin != 'false'">
+        <div *ngIf = "user.isAdmin !== 'false'">
           <a class="nav-link" routerLink="/addJob" >Add Job</a>
         </div>
       </li>
       <li class="nav-item">
-        <div *ngIf = "user.isAdmin == 'false' && email">
+        <div *ngIf = "user.isAdmin === 'false' && email">
           <a class="nav-link" routerLink="/appliedJobs">Applied Jobs</a>
         </div>
       </li>

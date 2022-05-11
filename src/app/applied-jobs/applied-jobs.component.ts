@@ -7,14 +7,11 @@ import { Router } from '@angular/router';
   templateUrl: './applied-jobs.component.html',
   styleUrls: ['./applied-jobs.component.css']
 })
-export class AppliedJobsComponent implements OnInit {
+export class AppliedJobsComponent{
 
   data: any
   constructor(private router:Router) { 
     this.init()
-  }
-
-  ngOnInit(): void {
   }
 
   async init(){

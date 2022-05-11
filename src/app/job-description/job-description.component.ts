@@ -9,7 +9,7 @@ import { getSessionStorage, uploadFileHelper, getUser, deleteJob, getAppliedStat
   templateUrl: './job-description.component.html',
   styleUrls: ['./job-description.component.css']
 })
-export class JobDescriptionComponent implements OnInit {
+export class JobDescriptionComponent{
   user:User = {
     firstname: '',
     lastname: '',
@@ -46,8 +46,6 @@ export class JobDescriptionComponent implements OnInit {
       this.handleUserData();
     }
   }
-
-  ngOnInit(): void {}
 
   async handleUserData(){
     this.user = await getUser(this.userEmail);

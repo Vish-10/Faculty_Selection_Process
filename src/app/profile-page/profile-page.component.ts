@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.css']
 })
-export class ProfilePageComponent implements OnInit {
+export class ProfilePageComponent {
 
   user: User = {
     firstname: '',
@@ -39,10 +39,7 @@ export class ProfilePageComponent implements OnInit {
       this.init(getSessionStorage("userEmail"))
     }
   }
-
-  ngOnInit(): void {
-  }
-
+  
   async init(email){
     this.user = await getUser(email)
     if(this.flag){

@@ -9,7 +9,7 @@ import {Job} from '../Interfaces/Job';
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent{
 
   data : Iterable<any>;
   user: User = {
@@ -28,9 +28,6 @@ export class HomePageComponent implements OnInit {
   constructor (private router:Router) { 
     this.data = [];
     this.init();
-  }
-
-  ngOnInit(): void {
   }
 
   async init(){

@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent{
   user: User;
   email: boolean;
   keys: string
@@ -37,12 +37,10 @@ export class NavbarComponent implements OnInit {
       this.handleUserData()
     }
   }
-  ngOnInit(): void {
-  }
 
-async handleUserData(){
-  this.user = await getUser(this.userEmail)
-}
+  async handleUserData(){
+    this.user = await getUser(this.userEmail)
+  }
 
  async logOut(){
     sessionStorage.removeItem('userEmail');

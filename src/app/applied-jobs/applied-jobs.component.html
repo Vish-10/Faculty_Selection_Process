@@ -17,11 +17,11 @@
                 <td>{{indexOfelement + 1}}</td>
                 <td >{{d.name}}</td>
                 <td style="text-align: center;">{{d.status}}</td>
-                <td style="text-align: center;" *ngIf = "d.status == 'Pending'"><button class="btn btn-danger btn-sm" type="button" (click) = "handleWithdraw(d.user, d.name, d.provider)">Withdraw</button></td>
-                <td style="text-align: center;" *ngIf = "d.status == 'Passed'"><button class="btn btn-primary btn-sm" type="button" (click) = "handleModelUpdate(d)">Book slot</button></td>
-                <td style="text-align: center;" *ngIf = "d.status == 'Accepted' || d.status == 'Failed' || d.status == 'RejectedV' || d.status == 'Rejected'"><span>NA</span></td>
-                <td style="text-align: center;" *ngIf = "d.documentVerificationSlot != '' "><span>{{d.documentVerificationSlot.split("+")[0]}} {{d.documentVerificationSlot.split("+")[1]}}</span></td>
-                <td style="text-align: center;" *ngIf = "d.documentVerificationSlot == '' "><span>NA</span></td>
+                <td style="text-align: center;" *ngIf = "d.status === 'Pending'"><button class="btn btn-danger btn-sm" type="button" (click) = "handleWithdraw(d.user, d.name, d.provider)">Withdraw</button></td>
+                <td style="text-align: center;" *ngIf = "d.status === 'Passed'"><button class="btn btn-primary btn-sm" type="button" (click) = "handleModelUpdate(d)">Book slot</button></td>
+                <td style="text-align: center;" *ngIf = "d.status === 'Accepted' || d.status === 'Failed' || d.status === 'RejectedV' || d.status === 'Rejected'"><span>NA</span></td>
+                <td style="text-align: center;" *ngIf = "d.documentVerificationSlot !=='' "><span>{{d.documentVerificationSlot.split("+")[0]}} {{d.documentVerificationSlot.split("+")[1]}}</span></td>
+                <td style="text-align: center;" *ngIf = "d.documentVerificationSlot === '' "><span>NA</span></td>
             </tr>
         </tbody>
     </table>

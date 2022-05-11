@@ -7,7 +7,7 @@ import { getAllSlots, addSlot} from '../firebase';
   templateUrl: './doc-manage-slots.component.html',
   styleUrls: ['./doc-manage-slots.component.css']
 })
-export class DocManageSlotsComponent implements OnInit {
+export class DocManageSlotsComponent{
 
   jobName: string
   provider: string
@@ -20,10 +20,6 @@ export class DocManageSlotsComponent implements OnInit {
     this.jobName = this.router.getCurrentNavigation()?.extras.state?.['role'];
     this.provider = this.router.getCurrentNavigation()?.extras.state?.['provider'];
     this.init()
-  }
-
-  ngOnInit(): void {
-    
   }
 
   async init(){
