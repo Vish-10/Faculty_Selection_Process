@@ -18,12 +18,17 @@ export class ModifyUsernamePasswordComponent{
    }
 
   async handleChangePassword(){
-    if (await changePassword(this.password)){
-      alert("Password changed successfully")
-      this.router.navigateByUrl('/profile')
+    if (this.password != "") {
+      if (await changePassword(this.password)){
+        alert("Password changed successfully")
+        this.router.navigateByUrl('/profile')
+      }
+      else{
+        alert("Relogin and try to change password again")
+      }
     }
     else{
-      alert("Relogin and try to change password again")
+      alert("Please Fill all the required Fields")
     }
   }
 

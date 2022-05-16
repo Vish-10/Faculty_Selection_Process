@@ -11,9 +11,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let d of data;let indexOfelement=index;" (click)="jobdescription(d)">
+        <tr *ngFor="let d of data;let indexOfelement=index;"  (click)="jobdescription(d)">
           <td>{{indexOfelement + 1}}</td>
-          <td >{{d.name}}</td>
+          <td id="row{{indexOfelement}}">{{d.name}}</td>
           <td>{{d.provider}}</td>
           <td>{{d.deadline}}</td>
         </tr>

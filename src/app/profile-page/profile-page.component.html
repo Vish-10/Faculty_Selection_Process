@@ -14,7 +14,7 @@
                     <div *ngIf="!flag" class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
                     <!-- Profile picture upload button-->
                     <button *ngIf="!flag" class="btn btn-primary" type="button">Upload new image</button>
-                    <br><br><button *ngIf="flag" class="btn btn-primary" type="button" (click)="handleResumeDownload()">Download Resume</button>
+                    <br><br><button *ngIf="flag" class="btn btn-primary" type="button" id = "downloadResume" (click)="handleResumeDownload()">Download Resume</button>
                 </div>
             </div>
         </div>
@@ -78,7 +78,7 @@
                         </div>
                         <!-- Save changes button-->
                         <div class="text-center">
-                            <button *ngIf="!flag" class="btn btn-primary" type="button" (click)="onSubmit()">Save changes</button>
+                            <button *ngIf="!flag" id="saveChanges" class="btn btn-primary" type="button" (click)="onSubmit()">Save changes</button>
                         </div>
                     </form>
                 </div>
@@ -87,16 +87,16 @@
     </div>
     <div class="text-center">
         <button *ngIf="!flag" class="btn btn-primary" type="button" routerLink="/modify">Modify Password</button>
-        <button *ngIf="!flag" class = "btn btn-danger" type = "button" (click) = "handleDeleteUser()">Delete account</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;<button *ngIf="!flag" class = "btn btn-danger" type = "button" (click) = "handleDeleteUser()">Delete account</button>
     </div>
 </div>
 <div *ngIf="flag" class = "text-center"  style="color: white;">
-    <button *ngIf="jobStatus === 'Pending'" class="btn btn-success" type="button" (click)="handleStatus('Accepted')" routerLink="/home-page">Accept</button>
-    <button *ngIf="jobStatus === 'Pending'" class="btn btn-danger" type="button" (click)="handleStatus('Rejected')" routerLink="/home-page">Reject</button>
-    <button *ngIf="jobStatus === 'Accepted'" class="btn btn-success" type="button" (click)="handleStatus('Passed')" routerLink="/home-page">Pass</button>
-    <button *ngIf="jobStatus === 'Accepted'" class="btn btn-danger" type="button" (click)="handleStatus('Failed')" routerLink="/home-page">Fail</button>
-    <button *ngIf="jobStatus === 'Passed'" class="btn btn-success" type="button" (click)="handleStatus('Verification done')" routerLink="/home-page">Verfied</button>
-    <button *ngIf="jobStatus === 'Passed'" class="btn btn-danger" type="button" (click)="handleStatus('RejectedV')" routerLink="/home-page">Failed</button>
-    <button *ngIf="jobStatus === 'RejectedV'" class="btn btn-danger" type="button" (click)="barUser()" routerLink="/home-page">Bar applicant</button>
+    <button *ngIf="jobStatus === 'Pending'" class="btn btn-success" id="accept" type="button" (click)="handleStatus('Accepted')" >Accept</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;<button *ngIf="jobStatus === 'Pending'" class="btn btn-danger" type="button" (click)="handleStatus('Rejected')" >Reject</button>
+    <button *ngIf="jobStatus === 'Accepted'" class="btn btn-success" type="button" (click)="handleStatus('Passed')" >Pass</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;<button *ngIf="jobStatus === 'Accepted'" class="btn btn-danger" type="button" (click)="handleStatus('Failed')" >Fail</button>
+    <button *ngIf="jobStatus === 'Passed'" class="btn btn-success" type="button" (click)="handleStatus('Verification done')" >Verfied</button>
+    &nbsp;&nbsp;&nbsp;&nbsp;<button *ngIf="jobStatus === 'Passed'" class="btn btn-danger" type="button" (click)="handleStatus('RejectedV')" >Failed</button>
+    <button *ngIf="jobStatus === 'RejectedV'" class="btn btn-danger" type="button" (click)="barUser()" >Bar applicant</button>
 </div>
 <br><br>

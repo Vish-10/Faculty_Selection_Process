@@ -16,12 +16,23 @@ export class BookslotChoiceComponent{
     this.user = getSessionStorage("userEmail");
    }
 
-  async handleSubmitSlots(form: NgForm){
+  handleSubmitSlots(form: NgForm){
     var value = form.controls['choiceRadios'].value;
-    var tempArr = value.split("+");
-    const date  = tempArr[0];
-    const time = tempArr[1];
-    updateDocSlot(date, time, this.slot.name, this.slot.provider, this.user);
+    if (value){
+      var tempArr = value.split("+");
+      const date  = tempArr[0];
+      const time = tempArr[1];
+      updateDocSlot(date, time, this.slot.name, this.slot.provider, this.user);
+      alert("Slot Confirmed")
+      this.router.navigateByUrl('/home-page')
+    } 
+    else{
+      alert("Please Choose a Slot")
+    }
+  }
+
+  resetSelection(form: NgForm){
+    form.controls['choiceRadios'].reset();
   }
 
 }

@@ -34,7 +34,7 @@ export class SignupComponent{
       }
     }
     else{
-      alert("Please Fill all required Fields");
+      alert("Please fill all the required fields");
     }
   }
 

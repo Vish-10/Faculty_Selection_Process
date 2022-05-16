@@ -10,26 +10,26 @@
                 <form>
                     <div class="row gx-3 mb-3">
                         <div class="col-md-6">
-                            <label class="small mb-1" for="jobName">Job Name</label>
-                            <input class="form-control" name="jobName" type="text" [(ngModel)] = "jobName" disabled>
+                            <label class="small mb-1" for="jobName">Job Name <span style="color: red;"> * </span></label>
+                            <input class="form-control" name="jobName" type="text" [(ngModel)] = "jobName" readonly>
                         </div>
                         <div class="col-md-6">
-                            <label class="small mb-1" for="jobProvider">Provider</label>
-                            <input class="form-control" name="jobProvider" type="text" [(ngModel)] = "provider" disabled>
+                            <label class="small mb-1" for="jobProvider">Provider <span style="color: red;"> * </span></label>
+                            <input class="form-control" name="jobProvider" type="text" [(ngModel)] = "provider" readonly>
                         </div>
                     </div>
                     <div class="row gx-3 mb-3">
                         <div class="col-md-6">
-                            <label class="small mb-1" for="eligibility">Date</label>
+                            <label class="small mb-1" for="eligibility">Date <span style="color: red;"> * </span></label>
                             <input class="form-control" name="eligibility" type="date" [(ngModel)] = "date">
                         </div>
                         <div class="col-md-6">
-                            <label class="small mb-1" for="deadline">Time</label>
+                            <label class="small mb-1" for="deadline">Time <span style="color: red;"> * </span></label>
                             <input class="form-control" name="deadline" type="time" [(ngModel)] = "time">
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label class="small mb-1" for="jobDescription">Max seats</label>
+                        <label class="small mb-1" for="jobDescription">Max seats <span style="color: red;"> * </span></label>
                         <input class="form-control" name="jobDescription" type = "number" [(ngModel)] = "seats" />
                     </div>
                     <!-- Save changes button-->

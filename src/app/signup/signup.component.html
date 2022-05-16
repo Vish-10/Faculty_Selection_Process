@@ -5,11 +5,11 @@
         <div class="row">
             <div class="col-md-6">
                 <label for="first_name" class="form-label">First Name <span style="color: red;"> * </span></label>
-              <input type="text" class="form-control" placeholder="First name" aria-label="First Name" [(ngModel)] = "user.firstname" >
+              <input type="text" class="form-control" id="firstName" placeholder="First name" aria-label="First Name" [(ngModel)] = "user.firstname" >
             </div>
             <div class="col-md-6">
                 <label for="last_name" class="form-label">Last Name <span style="color: red;"> * </span></label>
-              <input type="text" class="form-control" placeholder="Last name" aria-label="Last Name" [(ngModel)] = "user.lastname">
+              <input type="text" class="form-control" id="lastName" placeholder="Last name" aria-label="Last Name" [(ngModel)] = "user.lastname">
             </div>
         </div>
         <div class="row">
@@ -47,7 +47,7 @@
           <input type="text" class="form-control" id="inputZip" placeholder="pincode" >
         </div>
         <div class="col-12">
-          <button type="submit" class="btn btn-primary" (click) = "handleSubmit()">Sign up</button>
+          <button type="submit" class="btn btn-primary" id="signUpButton1" (click) = "handleSubmit()">Sign up</button>
         </div>
       </div>
 </div>

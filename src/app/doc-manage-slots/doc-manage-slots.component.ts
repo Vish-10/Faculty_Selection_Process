@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { getAllSlots, addSlot} from '../firebase';
+import { getAllSlots, addSlot } from '../firebase';
 
 @Component({
   selector: 'app-doc-manage-slots',
   templateUrl: './doc-manage-slots.component.html',
   styleUrls: ['./doc-manage-slots.component.css']
 })
-export class DocManageSlotsComponent{
+export class DocManageSlotsComponent {
 
   jobName: string
   provider: string
@@ -16,21 +16,27 @@ export class DocManageSlotsComponent{
   seats: number
   slots: any
 
-  constructor(private router:Router) { 
+  constructor(private router: Router) {
     this.jobName = this.router.getCurrentNavigation()?.extras.state?.['role'];
     this.provider = this.router.getCurrentNavigation()?.extras.state?.['provider'];
     this.init()
   }
 
-  async init(){
+  async init() {
     this.slots = await getAllSlots(this.provider, this.jobName);
   }
 
-  async handleSlots(){
-    await addSlot(this.provider, this.jobName, this.date, this.time, this.seats);
-    this.date = '';
-    this.time = '';
-    this.seats = 0;
-    this.slots = await getAllSlots(this.provider, this.jobName);
+  async handleSlots() {
+    if (this.provider != null && this.jobName != null && this.date != null && this.time != null && this.seats != null) {
+      await addSlot(this.provider, this.jobName, this.date, this.time, this.seats);
+      this.date = '';
+      this.time = '';
+      this.seats = 0;
+      this.slots = await getAllSlots(this.provider, this.jobName);
+    }
+    else{
+      alert("Please Fill all the required Fields")
+    }
+
   }
 }

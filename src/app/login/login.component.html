@@ -16,7 +16,7 @@
                     <input type="password" class="form-control" id="inputPassword3" [(ngModel)] = "user.password">
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary" (click) = "handleSubmit()">Sign in</button>&nbsp;
+                <button type="submit" class="btn btn-primary" id = "signInButton" (click) = "handleSubmit()">Sign in</button>&nbsp;
                 <a routerLink = '/signup'>Sign-Up</a>
                 <br><br>
                 <p (click)="handleForgotPassword()" style="color: darkcyan;" class="fp">Forgot Password?</p>

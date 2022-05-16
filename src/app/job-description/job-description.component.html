@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div *ngIf= "user.isAdmin === 'true'" class="text-center"><br />
-                <a class = "btn btn-danger" (click)="handleDelete()" routerLink="/home-page">Delete</a>&nbsp;&nbsp;
+                <a class = "btn btn-danger" id = "delete" (click)="handleDelete()" routerLink="/home-page">Delete</a>&nbsp;&nbsp;
                 <a class = "btn btn-warning" (click)="handleEdit()">Edit</a>&nbsp;&nbsp;
                 <a class = "btn btn-info" (click)="handleSlots()">Manage Slots</a>
             </div>
@@ -34,8 +34,8 @@
         <br/>
         <div *ngFor="let a of data;let indexOfelement=index;">
             <div class="card"  id="applicants">
-                <div class="card-body" (click)="viewApplicantDetails(a.email)">
-                    <h6>{{indexOfelement + 1}}. {{a.firstname}} {{a.lastname}}</h6>
+                <div class="card-body" id = "applicant{{indexOfelement}}" (click)="viewApplicantDetails(a.email)">
+                    <h6 >{{indexOfelement + 1}}. {{a.firstname}} {{a.lastname}}</h6>
                 </div>
             </div>
             <br/>

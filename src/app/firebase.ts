@@ -134,7 +134,7 @@ export async function logOutFirebase() {
 }
 
 export async function uploadFileHelper(file, jobProvider, jobName, userEmail){
-  const fileName = jobProvider + '/' + jobName + '/' + userEmail;
+  const fileName = jobProvider + '/' + jobName + '/' + userEmail + ".pdf";
   const storageRef = ref(storage, fileName);
   var flag = await uploadBytes(storageRef, file).then(async (snapshot) => {
     const newApplication = await addDoc(collection(db, 'appliedJobs'), {user: userEmail, provider: jobProvider, name: jobName, status: 'Pending', documentVerificationSlot: ''})
@@ -210,7 +210,7 @@ export async function changePassword(newPassword){
 export async function downloadResume(role, email){
   var userEmail = getSessionStorage("userEmail")
   const user = await getUser(userEmail);
-  const storagePath = user.isAdmin + '/' + role + '/' + email;
+  const storagePath = user.isAdmin + '/' + role + '/' + email + ".pdf";
   getDownloadURL(ref(storage, storagePath))
   .then(url => {
     window.open(url, '_blank');
@@ -281,7 +281,7 @@ export async function withdrawApplication(email, jobName, provider) {
   const querySnapshot = await getDocs(q);
   querySnapshot.forEach(async docT => {
     var temp = docT.data()
-    const desertRef = ref(storage, temp['provider']+ '/' + temp['name'] + '/' + temp['user']);
+    const desertRef = ref(storage, temp['provider']+ '/' + temp['name'] + '/' + temp['user'] + ".pdf");
     await deleteObject(desertRef).then(async () => {
       await deleteDoc(doc(db, 'appliedJobs', docT.id))
     }).catch((error) => {

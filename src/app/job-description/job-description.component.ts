@@ -68,6 +68,8 @@ export class JobDescriptionComponent{
 
   handleDelete(){
     deleteJob(this.job)
+    alert("Job Deleted Successfully")
+    this.router.navigateByUrl('/home-page')
   }
 
   viewApplicantDetails(email){
@@ -83,7 +85,7 @@ export class JobDescriptionComponent{
       console.log(this.file);
       var flag = await uploadFileHelper(this.file, this.job.provider, this.job.name, this.userEmail)
       if (flag){
-        this.router.navigateByUrl('/home-page')
+        this.applied = true
       alert("Job Applied Successfully")
       }
     }

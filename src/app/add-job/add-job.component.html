@@ -11,36 +11,36 @@
                 <div class="row gx-3 mb-3">
                     <!-- Form Group (Job Name)-->
                     <div class="col-md-6">
-                        <label class="small mb-1" for="jobName">Job Name</label>
+                        <label class="small mb-1" for="jobName">Job Name <span style="color: red;"> * </span></label>
                         <input class="form-control" name="jobName" type="text" [(ngModel)] = "job.name">
                     </div>
                     <!-- Form Group (Provider)-->
                     <div class="col-md-6">
-                        <label class="small mb-1" for="jobProvider">Provider</label>
-                        <input class="form-control" name="jobProvider" type="text" [(ngModel)] = "job.provider">
+                        <label class="small mb-1" for="jobProvider">Provider <span style="color: red;"> * </span></label>
+                        <input class="form-control" name="jobProvider" type="text" [(ngModel)] = "job.provider" readonly>
                     </div>
                 </div>
                 <!-- Form Row-->
                 <div class="row gx-3 mb-3">
                     <!-- Form Group (Eligibility Criteria)-->
                     <div class="col-md-6">
-                        <label class="small mb-1" for="eligibility">Eligibility Criteria</label>
+                        <label class="small mb-1" for="eligibility">Eligibility Criteria <span style="color: red;"> * </span></label>
                         <input class="form-control" name="eligibility" type="text" [(ngModel)] = "job.eligibilty">
                     </div>
                     <!-- Form Group (Deadline)-->
                     <div class="col-md-6">
-                        <label class="small mb-1" for="deadline">Deadline</label>
-                        <input class="form-control" name="deadline" type="date" [(ngModel)] = "job.deadline">
+                        <label class="small mb-1" for="deadline">Deadline <span style="color: red;"> * </span></label>
+                        <input class="form-control" name="deadline" type="text" [(ngModel)] = "job.deadline">
                     </div>
                 </div>
                 <!-- Form Group (Job Description)-->
                 <div class="mb-3">
-                    <label class="small mb-1" for="jobDescription">Job Description</label>
+                    <label class="small mb-1" for="jobDescription">Job Description <span style="color: red;"> * </span></label>
                     <textarea class="form-control" name="jobDescription" rows="5" [(ngModel)] = "job.JD"></textarea>
                 </div>
                 <!-- Save changes button-->
                 <div class="text-center">
-                    <button class="btn btn-primary" type="button" (click)="handleAddJob()" routerLink="/home-page   ">Submit</button>
+                    <button class="btn btn-primary" type="button" id="submit" (click)="handleAddJob()" routerLink="/home-page   ">Submit</button>
                 </div>
             </form>
         </div>

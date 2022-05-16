@@ -37,7 +37,7 @@ export class LoginComponent {
       }
     }
     else{
-      alert("Please Fill All the Fields")
+      alert("Please fill all the required Fields")
     }
     
   }

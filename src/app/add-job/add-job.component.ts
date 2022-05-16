@@ -52,10 +52,21 @@ user: User = {
   }
 
   handleAddJob(){
-    if(!this.flag)
-      addJobData(this.job);
-    else  
-      updateJob(this.job)
+    if(this.job.JD != "" && this.job.deadline != "" && this.job.eligibilty != "" && this.job.name != ""){
+      if(!this.flag){
+        addJobData(this.job);
+        alert("Job added Successfully")
+        this.router.navigateByUrl("/home-page")
+      }
+      else{  
+        updateJob(this.job)
+        alert("Job updated Successfully")
+        this.router.navigateByUrl("/home-page")
+      }
+    }
+    else{
+      alert("Please Fill all the required Fields")
+    }
   }
 
 }

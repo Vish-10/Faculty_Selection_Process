@@ -58,6 +58,8 @@ export class ProfilePageComponent {
 
   async handleStatus(status){
     await updateJobStatus(this.user.email, this.role, this.provider, status);
+    alert("Applicant status updated")
+    this.jobStatus = status
   }
 
   async handleDeleteUser(){
