@@ -32,4 +32,8 @@ export class AppliedJobsComponent{
     this.router.navigateByUrl('/bookSlotChoice', {state: {slot: slot}})
   }
 
+  handleFaculty(){
+    window.open('https://harinath-sci.github.io/ang2/login', "_blank");
+  }
+
 }
