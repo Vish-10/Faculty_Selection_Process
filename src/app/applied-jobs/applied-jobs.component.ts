@@ -33,7 +33,7 @@ export class AppliedJobsComponent{
   }
 
   handleFaculty(){
-    window.open('https://harinath-sci.github.io/ang2/login', "_blank");
+    window.open('https://harinath-sci.github.io/ang3/', "_blank");
   }
 
 }
